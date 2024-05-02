@@ -1,0 +1,2 @@
+Lib para responsividade em diversos tamanhos de telas
+https://www.npmjs.com/package/react-native-responsive-screen
