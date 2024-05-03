@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native'
-import { StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, StatusBar } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { useFonts } from 'expo-font'  
 
@@ -17,7 +16,7 @@ export default function App() {
   
   return (
     <View style={styles.container}>
-
+      <StatusBar backgroundColor='#000' />
       <Image
       source={require("./src/assets/logo.png")}
       style={styles.logo}
