@@ -1,9 +1,23 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput } from 'react-native'
-import { Feather } from '@expo/vector-icons' 
+import { StatusBar } from 'react-native';
+import { Feather } from '@expo/vector-icons'
+import { useFonts } from 'expo-font'  
 
 export default function App() {
+  
+  const [fontsLoad] = useFonts({
+    'Poppins-Light': require('./src/assets/fonts/Poppins-Light.ttf'),
+    'Poppins-SemiBold': require('./src/assets/fonts/Poppins-SemiBold.ttf'),
+    'AtkinsonHyperlegible-Bold': require('./src/assets/fonts/AtkinsonHyperlegible-Bold.ttf')
+  })
+
+  if(!fontsLoad) {
+    return undefined;
+  }
+  
   return (
     <View style={styles.container}>
+
       <Image
       source={require("./src/assets/logo.png")}
       style={styles.logo}
@@ -34,12 +48,14 @@ export default function App() {
         <Text style={styles.buttonForgetText}>Esqueceu a senha?</Text>
       </TouchableOpacity>
 
+      {/* Botão Acessar */}
       <TouchableOpacity style={styles.buttonLogin}>
         <Text style={styles.buttonLoginText}>Acessar</Text>
       </TouchableOpacity>
 
-      <Text style={{marginTop: 24,fontSize: 14,fontWeight: 'regular',}}>OU</Text>
+      <Text style={{marginTop: 24,fontSize: 14, fontFamily: "Poppins-Light"}}>OU</Text>
 
+      {/* Botão Cadastre-se */}
       <View style={[styles.signUpContainer, {marginTop: 24}]}>
         <Text style={styles.signUpText}>Ainda não possui uma conta? </Text>
         <TouchableOpacity>
@@ -68,8 +84,8 @@ const styles = StyleSheet.create({
   },
   logoText: {
     fontSize: 64,
-    fontWeight: 'bold',
     marginTop: 24,
+    fontFamily: 'AtkinsonHyperlegible-Bold',
     marginBottom: 52,
     textShadowColor: 'rgba(0, 0, 0, 0.25)', // Cor da sombra
     textShadowOffset: { width: 0, height: 4 }, // Deslocamento da sombra
@@ -90,6 +106,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#A7A7A7',
     paddingVertical: 0,
+    fontFamily: "Poppins-Light",
   },
   buttonForget: {
     alignSelf: 'flex-end',
@@ -99,6 +116,7 @@ const styles = StyleSheet.create({
   buttonForgetText: {
     fontSize: 12,
     fontWeight: 'light',
+    fontFamily: "Poppins-Light",
   },
   buttonLogin: {
     marginTop: 24,
@@ -111,7 +129,8 @@ const styles = StyleSheet.create({
   },
   buttonLoginText: {
     fontSize: 24,
-    color: '#FFFFFF'
+    color: '#FFFFFF',
+    fontFamily: "Poppins-SemiBold",
   },
   signUpContainer: {
     flexDirection: 'row',
@@ -120,8 +139,10 @@ const styles = StyleSheet.create({
   signUpText: {
     fontSize: 16,
     fontWeight: 'light',
+    fontFamily: "Poppins-Light",
   },
   signUpLinkText: {
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
+    fontFamily: "Poppins-Light",
   }
 });
