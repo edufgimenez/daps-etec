@@ -1,10 +1,11 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Login } from './screens/Login';
-import { SignUp } from "./screens/SignUp";
+import { createStackNavigator } from '@react-navigation/stack';
 
-const Stack = createNativeStackNavigator();
+import { Login } from '../screens/Login';
+import { SignUp } from "../screens/SignUp";
 
-export function Routes() {
+const Stack = createStackNavigator();
+
+export default function StackRoutes() {
     return(
         <Stack.Navigator>
             <Stack.Screen
@@ -19,9 +20,9 @@ export function Routes() {
              options={{
                 title: 'Login',
                 animation: "slide_from_right",
+                gestureEnabled: true
              }}
              />
         </Stack.Navigator>
     )
 }
-

@@ -9,6 +9,7 @@
     "splash": {
       "image": "./src/assets/logo.png",
       "resizeMode": "center",
+      "aspectRatio": "1.5",
       "backgroundColor": "#F0A901"
     },
     "assetBundlePatterns": [

@@ -5,12 +5,12 @@ import {
   Image, 
   TouchableOpacity, 
   TextInput, 
-  StatusBar } from 'react-native'
+  StatusBar, 
+  } from 'react-native'
 import { Feather } from '@expo/vector-icons'
 import { useFonts } from 'expo-font'
 import { useNavigation } from '@react-navigation/native' 
  
-
 export function Login() {
 
   const navigation = useNavigation();
@@ -91,9 +91,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#E9E9E9",
   },
   logo: {
-    marginTop: 12,
+    marginTop: 24,
     width: '60%',
-    height: '32%', 
+    height: '32%',
+    resizeMode: 'stretch', 
   },
   logoText: {
     fontSize: 64,
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0, 0, 0, 0.25)', // Cor da sombra
     textShadowOffset: { width: 0, height: 4 }, // Deslocamento da sombra
     textShadowRadius: 4, // Raio da sombra
-  },
+  }, 
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
