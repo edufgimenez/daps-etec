@@ -1,83 +1,83 @@
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
-  Image, 
-  TouchableOpacity, 
-  TextInput, 
-  StatusBar, 
-  } from 'react-native'
-import { Feather } from '@expo/vector-icons'
-import { useFonts } from 'expo-font'
-import { useNavigation } from '@react-navigation/native' 
- 
-export function Login() {
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  StatusBar,
+  KeyboardAvoidingView,
+} from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
+import { useNavigation } from '@react-navigation/native';
+import { RFValue } from 'react-native-responsive-fontsize';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+//import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+export function Login() {
   const navigation = useNavigation();
+  //const insets = useSafeAreaInsets();
+
   const navigateSignUp = () => {
     navigation.navigate('SignUp');
-  }
-  
+  };
+
   const [fontsLoad] = useFonts({
     'Poppins-Light': require('../assets/fonts/Poppins-Light.ttf'),
     'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
-    'AtkinsonHyperlegible-Bold': require('../assets/fonts/AtkinsonHyperlegible-Bold.ttf')
-  })
+    'AtkinsonHyperlegible-Bold': require('../assets/fonts/AtkinsonHyperlegible-Bold.ttf'),
+  });
 
-  if(!fontsLoad) {
+  if (!fontsLoad) {
     return undefined;
   }
-  
+
   return (
-    <View style={styles.container}>
-      <StatusBar backgroundColor='#000' />
-      <Image
-      source={require("../assets/logo.png")}
-      style={styles.logo}
-      />
+    <View style={[styles.container, { paddingTop: hp('1.2%') }]}>
+      <StatusBar backgroundColor="#000" />
+      <Image source={require('../assets/logo.png')} style={styles.logo} />
       <Text style={styles.logoText}>D.A.P.S</Text>
-      
-      {/* Campo de entrada de CPF */}
+
       <View style={styles.inputContainer}>
-      <Feather name="user" size={33} color="#000000" style={styles.icon} />
-        <TextInput 
+        <Feather name="user" size={RFValue(33)} color="#000000" style={styles.icon} />
+        <TextInput
           style={styles.input}
-          placeholder='Digite seu CPF'
-          keyboardType='numeric'
+          placeholder="Digite seu CPF"
+          keyboardType="numeric"
         />
       </View>
-      {/* Campo de entrada de senha */}
-      <View style={[styles.inputContainer, {marginTop: 24}]}>
-        <Feather name="lock" size={33} color="#000000" style={styles.icon} />
-        <TextInput 
+
+      <View style={[styles.inputContainer, { marginTop: hp('3.5%') }]}>
+        <Feather name="lock" size={RFValue(33)} color="#000000" style={styles.icon} />
+        <TextInput
           style={styles.input}
-          placeholder='Digite sua senha'
+          placeholder="Digite sua senha"
           secureTextEntry={true}
-        />        
+        />
       </View>
-      
-      {/* Botão esqueceu a senha */}
+
       <TouchableOpacity style={styles.buttonForget}>
         <Text style={styles.buttonForgetText}>Esqueceu a senha?</Text>
       </TouchableOpacity>
 
-      {/* Botão Acessar */}
       <TouchableOpacity style={styles.buttonLogin}>
         <Text style={styles.buttonLoginText}>Acessar</Text>
       </TouchableOpacity>
 
-      <Text style={{marginTop: 24,fontSize: 14, fontFamily: "Poppins-Light"}}>OU</Text>
+      <Text style={{ marginTop: hp('3.5%'), fontSize: RFValue(14), fontFamily: 'Poppins-Light' }}>
+        OU
+      </Text>
 
-      {/* Botão Cadastre-se */}
-      <View style={[styles.signUpContainer, {marginTop: 24}]}>
+      <View style={[styles.signUpContainer, { marginTop: hp('3.5%') }]}>
         <Text style={styles.signUpText}>Ainda não possui uma conta? </Text>
         <TouchableOpacity onPress={navigateSignUp}>
           <Text style={styles.signUpLinkText}>Cadastre-se</Text>
         </TouchableOpacity>
       </View>
-
-
-
     </View>
   );
 }
@@ -85,80 +85,74 @@ export function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'grid',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: "#E9E9E9",
+    backgroundColor: '#E9E9E9',
   },
   logo: {
-    marginTop: 24,
-    width: '60%',
-    height: '32%',
-    resizeMode: 'stretch', 
+    marginTop: hp('3%'),
+    width: wp('60%'),
+    height: hp('25%'),
+    aspectRatio: 1,
   },
   logoText: {
-    fontSize: 64,
-    marginTop: 24,
+    fontSize: RFValue(64),
+    marginTop: hp('2%'),
     fontFamily: 'AtkinsonHyperlegible-Bold',
-    marginBottom: 52,
-    textShadowColor: 'rgba(0, 0, 0, 0.25)', // Cor da sombra
-    textShadowOffset: { width: 0, height: 4 }, // Deslocamento da sombra
-    textShadowRadius: 4, // Raio da sombra
-  }, 
+    marginBottom: hp('6.5%'),
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textShadowOffset: { width: 0, height: 4 },
+    textShadowRadius: 4,
+  },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 24,
-    marginHorizontal: 24,
-    paddingVertical: 0,
+    marginHorizontal: wp('6%'),
   },
   icon: {
-    marginRight: 8,
+    marginRight: wp('2%'),
   },
   input: {
     flex: 1,
-    fontSize: 18,
+    fontSize: RFValue(18),
+    fontFamily: 'Poppins-Light',
     borderBottomWidth: 1,
     borderBottomColor: '#A7A7A7',
-    paddingVertical: 0,
-    fontFamily: "Poppins-Light",
+    
   },
   buttonForget: {
     alignSelf: 'flex-end',
-    marginTop: 10,
-    marginHorizontal: 24
+    marginTop: hp('1.25%'),
+    marginHorizontal: wp('6%'),
   },
   buttonForgetText: {
-    fontSize: 12,
-    fontWeight: 'light',
-    fontFamily: "Poppins-Light",
+    fontSize: RFValue(12),
+    fontFamily: 'Poppins-Light',
   },
   buttonLogin: {
-    marginTop: 24,
+    marginTop: hp('3%'),
     borderRadius: 20,
     backgroundColor: '#F1A801',
-    paddingVertical: 10,
+    paddingVertical: hp('1.25%'),
     alignItems: 'center',
     justifyContent: 'center',
-    width: '80%',
+    width: wp('80%'),
   },
   buttonLoginText: {
-    fontSize: 24,
+    fontSize: RFValue(24),
     color: '#FFFFFF',
-    fontFamily: "Poppins-SemiBold",
+    fontFamily: 'Poppins-SemiBold',
   },
   signUpContainer: {
-    flexDirection: 'row',
+    flexDirection: 'grid',
     alignItems: 'center',
-    marginBottom: 12
+    marginBottom: hp('1.5%'),
   },
   signUpText: {
-    fontSize: 16,
-    fontWeight: 'light',
-    fontFamily: "Poppins-Light",
+    fontSize: RFValue(16),
+    fontFamily: 'Poppins-Light',
   },
   signUpLinkText: {
     textDecorationLine: 'underline',
-    fontFamily: "Poppins-Light",
-  }
+    fontFamily: 'Poppins-Light',
+  },
 });
