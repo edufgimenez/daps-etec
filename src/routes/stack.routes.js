@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 
 export default function StackRoutes() {
     return(
-        <Stack.Navigator initialRouteName='NovaDenuncia'>
+        <Stack.Navigator initialRouteName='Main'>
             <Stack.Screen
              name="Login" 
              component={Login} 
