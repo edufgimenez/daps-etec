@@ -9,7 +9,7 @@ dist/
 web-build/
 
 # supabase
-src/utils/supabase.js
+/src/utils/supabase.js
 
 # Native
 *.orig.*
