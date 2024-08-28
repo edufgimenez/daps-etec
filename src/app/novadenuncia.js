@@ -1,15 +1,7 @@
 import React, { useState } from 'react';
-import {
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import {  Text,  View,  TextInput,  TouchableOpacity, StatusBar} from 'react-native';
 import { useFonts } from 'expo-font';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
+import {  widthPercentageToDP as wp,  heightPercentageToDP as hp,} from 'react-native-responsive-screen';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CheckBox from 'expo-checkbox';
 import styles from './styles/novadenuncia.style';
@@ -36,6 +28,7 @@ export default function NovaDenuncia() {
 
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
+      <StatusBar style="auto" backgroundColor={"#fff"} />
       
       {/* Título */}
       <Text style={styles.title}>D.A.P.S.</Text>

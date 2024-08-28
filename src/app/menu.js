@@ -27,7 +27,7 @@ export default function Main() {
 
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
-      <StatusBar backgroundColor="#000" />
+      <StatusBar style="auto" backgroundColor={"#fff"} />
       
       {/* Logo */}
       <Image

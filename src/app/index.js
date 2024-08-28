@@ -5,22 +5,21 @@ import {
     TouchableOpacity,
     TextInput,
     StatusBar,
+    ImageBackground,
   } from 'react-native';
   import { Feather } from '@expo/vector-icons';
   import { useFonts } from 'expo-font';
-  import { useNavigation } from '@react-navigation/native';
   import { RFValue } from 'react-native-responsive-fontsize';
   import {
     widthPercentageToDP as wp,
     heightPercentageToDP as hp,
   } from 'react-native-responsive-screen';
-  //import { useSafeAreaInsets } from 'react-native-safe-area-context';
+  import { useSafeAreaInsets } from 'react-native-safe-area-context';
   import { router } from 'expo-router';
   import styles from './styles/index.style';
   
   export default function Login() {
-    const navigation = useNavigation();
-    //const insets = useSafeAreaInsets();
+    const insets = useSafeAreaInsets();
   
     const navigateSignUp = () => {
       router.navigate("./signup")
@@ -38,9 +37,10 @@ import {
   
     return (
       <View style={[styles.container, { paddingTop: hp('1.2%') }]}>
-        <StatusBar backgroundColor="#000" />
+        <StatusBar style="auto" backgroundColor={"#fff"} />
         <Image source={require('../assets/logo.png')} style={styles.logo} />
         <Text style={styles.logoText}>D.A.P.S</Text>
+        
   
         <View style={styles.inputContainer}>
           <Feather name="user" size={RFValue(33)} color="#000000" style={styles.icon} />

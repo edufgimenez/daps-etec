@@ -10,9 +10,9 @@ const styles = StyleSheet.create({
     },
     logoText: {
       fontSize: RFValue(38), // Diminui o tamanho da fonte do logo
-      marginTop: hp('3%'),
+      marginTop: hp('0.5%'),
       fontFamily: 'AtkinsonHyperlegible-Bold',
-      marginBottom: hp('1.5%'), // Diminui o espaçamento inferior
+      marginBottom: hp('1.2%'), // Diminui o espaçamento inferior
       textShadowColor: 'rgba(0, 0, 0, 0.25)',
       textShadowOffset: { width: 0, height: 4 },
       textShadowRadius: 4,
@@ -26,8 +26,9 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
       marginHorizontal: wp('6%'),
-      marginBottom: hp('0.5%'), // Diminui o padding inferior
-    },
+      marginBottom: hp('0.5%'),
+      position: 'relative', // Adicione esta linha
+    },    
     icon: {
       marginRight: wp('2%'),
     },
@@ -38,21 +39,37 @@ const styles = StyleSheet.create({
       borderBottomWidth: 1,
       borderBottomColor: '#A7A7A7',
     },
-    buttonLogin: {
+    buttonSignUp: {
       marginTop: hp('4%'), // Diminui o espaçamento superior
       borderRadius: 20,
       backgroundColor: '#F1A801',
-      paddingVertical: hp('1%'), // Diminui o padding vertical
+      paddingVertical: hp('1.25%'), // Diminui o padding vertical
       alignItems: 'center',
       justifyContent: 'center',
       width: wp('80%'),
       marginBottom: hp('2%'), // Diminui o espaçamento inferior
     },
-    buttonLoginText: {
+    buttonSignUpText: {
       fontSize: RFValue(18), // Diminui o tamanho da fonte do botão
       color: '#FFFFFF',
       fontFamily: 'Poppins-SemiBold',
     },
+    eyeIconContainer: {
+      position: 'absolute',
+      right: 0,
+      padding: wp('1%'),
+    },
+    inputError: {
+      borderBottomColor: 'red',
+    },
+      errorText: {
+    color: 'red',
+    fontSize: RFValue(12),
+    marginTop: hp('0.5%'),
+    fontFamily: 'Poppins-Light',
+  },
+    
+    
   });
   
   export default styles;
