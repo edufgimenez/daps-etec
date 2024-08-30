@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#E9E9E9',
     },
     logoText: {
-      fontSize: RFValue(38), // Diminui o tamanho da fonte do logo
+      fontSize: RFValue(42), // Diminui o tamanho da fonte do logo
       marginTop: hp('0.5%'),
       fontFamily: 'AtkinsonHyperlegible-Bold',
       marginBottom: hp('1.2%'), // Diminui o espaçamento inferior
@@ -40,17 +40,17 @@ const styles = StyleSheet.create({
       borderBottomColor: '#A7A7A7',
     },
     buttonSignUp: {
-      marginTop: hp('4%'), // Diminui o espaçamento superior
-      borderRadius: 20,
+      marginTop: hp('2%'), // Diminui o espaçamento superior
+      borderRadius: 8,
       backgroundColor: '#F1A801',
-      paddingVertical: hp('1.25%'), // Diminui o padding vertical
+      paddingVertical: hp('1%'), // Diminui o padding vertical
       alignItems: 'center',
       justifyContent: 'center',
-      width: wp('80%'),
+      width: wp('75%'),
       marginBottom: hp('2%'), // Diminui o espaçamento inferior
     },
     buttonSignUpText: {
-      fontSize: RFValue(18), // Diminui o tamanho da fonte do botão
+      fontSize: RFValue(24), // Diminui o tamanho da fonte do botão
       color: '#FFFFFF',
       fontFamily: 'Poppins-SemiBold',
     },

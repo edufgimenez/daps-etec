@@ -1,19 +1,15 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  StatusBar,
-  Image,
-} from 'react-native';
+import { Text, View, TouchableOpacity, StatusBar, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
+import { useRouter } from 'expo-router'; // Importação do hook useRouter
 import styles from './styles/menu.style';
 
 export default function Main() {
   const insets = useSafeAreaInsets();
+  const router = useRouter(); // Obtenção da instância do roteador
 
   const [fontsLoad] = useFonts({
     'Poppins-Light': require('../assets/fonts/Poppins-Light.ttf'),
@@ -38,7 +34,10 @@ export default function Main() {
 
       <View style={styles.menuContainer}>
         {/* Opções de Menu */}
-        <TouchableOpacity style={styles.menuOption}>
+        <TouchableOpacity 
+          style={styles.menuOption} 
+          onPress={() => router.navigate('/novadenuncia')} // Navegação para a tela novadenuncia
+        >
           <Feather name="file-plus" size={RFValue(24)} color="#000000" />
           <Text style={styles.menuText}>Nova Denúncia</Text>
         </TouchableOpacity>

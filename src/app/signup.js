@@ -9,6 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import styles from './styles/signup.style';
 import { supabase } from '../utils/supabase.js';
 import CustomModal from '../components/Modals/CustomModal.js';
+import * as Crypto from 'expo-crypto'; // Importação do expo-crypto
 
 export default function SignUp() {
   const insets = useSafeAreaInsets();
@@ -46,6 +47,12 @@ export default function SignUp() {
   const handleSignUp = async () => {
     const { nome, sobrenome, cpf, dataNascimento, email, celular, senha } = formData;
 
+    if (!nome || !sobrenome || !cpf || !dataNascimento || !email || !celular || !senha) {
+      setModalMessage('Todos os campos são obrigatórios.');
+      setModalVisible(true);
+      return;
+    }
+
     // Verificar se o CPF já existe no banco
     const { data: existingUser, error } = await supabase
       .from('usuarios')
@@ -65,6 +72,12 @@ export default function SignUp() {
       return;
     }
 
+    // Hash da senha usando expo-crypto
+    const hashedPassword = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      senha
+    );
+
     // Inserir novo usuário no banco
     const { data, error: insertError } = await supabase
       .from('usuarios')
@@ -75,7 +88,7 @@ export default function SignUp() {
         data_nascimento: dataNascimento,
         email,
         celular,
-        senha
+        senha: hashedPassword
       }]);
 
     if (insertError) {

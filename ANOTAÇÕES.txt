@@ -1,2 +1,21 @@
 Lib para responsividade em diversos tamanhos de telas
     https://www.npmjs.com/package/react-native-responsive-screen
+
+
+
+
+
+  buttonLogout: {
+    marginTop: hp('3%'),
+    borderRadius: 8,
+    backgroundColor: '#F1A801',
+    paddingVertical: hp('1%'),
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: wp('75%'),
+  },
+  buttonLogoutText: {
+    fontSize: RFValue(24),
+    color: '#FFFFFF',
+    fontFamily: 'Poppins-SemiBold',
+  },

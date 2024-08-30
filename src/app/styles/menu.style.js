@@ -17,23 +17,26 @@ const styles = StyleSheet.create({
     menuContainer: {
       flex: 1,
       justifyContent: 'center', // Centraliza verticalmente os itens
-      width: wp('80%'),
+      alignItems: 'center',
+      width: wp('100%'),
     },
     menuOption: {
       flexDirection: 'row',
       alignItems: 'center',
-      borderRadius: 20,
+      borderRadius: 8,
       backgroundColor: '#F1A801',
-      paddingVertical: hp('1.5%'),
+      paddingVertical: hp('1.25%'),
       paddingHorizontal: wp('5%'),
       marginVertical: hp('1.5%'),
+      width: wp('75%'),
     },
     menuText: {
       fontSize: RFValue(18),
       color: '#FFFFFF',
       fontFamily: 'Poppins-SemiBold',
       marginLeft: wp('4%'),
-      textAlignVertical: 'center', // Garantir que o texto esteja centralizado verticalmente
+      alignItems: 'center',
+      //textAlignVertical: 'center', // Garantir que o texto esteja centralizado verticalmente
     },
   });
 

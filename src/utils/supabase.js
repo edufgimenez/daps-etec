@@ -1,9 +1,8 @@
 // supabase.js
 import { createClient } from '@supabase/supabase-js';
+import Constants from 'expo-constants';
 
-// Load environment variables from .env file
-const SUPABASE_URL = '3';
-const SUPABASE_ANON_KEY = '3';
-
+const { supabaseUrl, supabaseAnonKey } = Constants.expoConfig.extra;
+//console.log(Constants.expoConfig.extra);
 // Create a single supabase client for interacting with your database
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
