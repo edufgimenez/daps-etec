@@ -38,6 +38,15 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       //textAlignVertical: 'center', // Garantir que o texto esteja centralizado verticalmente
     },
+    logoText: {
+      fontSize: RFValue(48),
+      marginTop: hp('2%'),
+      fontFamily: 'AtkinsonHyperlegible-Bold',
+      marginBottom: hp('2.5%'),
+      textShadowColor: 'rgba(0, 0, 0, 0.25)',
+      textShadowOffset: { width: 0, height: 4 },
+      textShadowRadius: 4,
+    },
   });
 
   export default styles;

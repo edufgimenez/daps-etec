@@ -31,6 +31,7 @@ export default function Main() {
         style={styles.logo}
         resizeMode="contain"
       />
+      <Text style={styles.logoText}>D.A.P.S</Text>
 
       <View style={styles.menuContainer}>
         {/* Opções de Menu */}

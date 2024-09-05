@@ -16,7 +16,6 @@ export default function NovaDenuncia() {
   });
 
   const [checked, setChecked] = useState({
-    armed: false,
     anonymous: false,
   });
 
@@ -37,7 +36,7 @@ export default function NovaDenuncia() {
       {/* Campos de texto */}
       <TextInput
         style={styles.input}
-        placeholder="Local"
+        placeholder="Local da ocorrência"
         placeholderTextColor="#666"
       />
       <View style={styles.textAreaContainer}>
@@ -46,24 +45,17 @@ export default function NovaDenuncia() {
           placeholder="Descreva a ocorrência"
           placeholderTextColor="#666"
           multiline={true}
-          maxLength={300}
+          maxLength={100}
           value={description}
           onChangeText={text => setDescription(text)}
         />
         <Text style={styles.charCount}>
-          {description.length}/300
+          {description.length}/100
         </Text>
       </View>
 
       {/* Checkboxes */}
       <View style={styles.checkboxContainer}>
-        <View style={styles.checkboxItem}>
-          <CheckBox
-            value={checked.armed}
-            onValueChange={(newValue) => setChecked({ ...checked, armed: newValue })}
-          />
-          <Text style={styles.checkboxLabel}>Tem alguém armado</Text>
-        </View>
         <View style={styles.checkboxItem}>
           <CheckBox
             value={checked.anonymous}
