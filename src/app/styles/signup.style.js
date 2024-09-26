@@ -6,11 +6,11 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
-      backgroundColor: '#E9E9E9',
+      backgroundColor: '#fff',
     },
     logoText: {
       fontSize: RFValue(42), // Diminui o tamanho da fonte do logo
-      marginTop: hp('0.5%'),
+      marginTop: hp('2%'),
       fontFamily: 'AtkinsonHyperlegible-Bold',
       marginBottom: hp('1.2%'), // Diminui o espaçamento inferior
       textShadowColor: 'rgba(0, 0, 0, 0.25)',
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
       borderBottomColor: '#A7A7A7',
     },
     buttonSignUp: {
-      marginTop: hp('2%'), // Diminui o espaçamento superior
+      marginTop: hp('4%'), // Diminui o espaçamento superior
       borderRadius: 8,
       backgroundColor: '#F1A801',
       paddingVertical: hp('1%'), // Diminui o padding vertical
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     inputError: {
       borderBottomColor: 'red',
     },
-      errorText: {
+    errorText: {
     color: 'red',
     fontSize: RFValue(12),
     marginTop: hp('0.5%'),

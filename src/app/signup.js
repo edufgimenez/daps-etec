@@ -127,10 +127,8 @@ export default function SignUp() {
             { name: 'file-text', placeholder: 'CPF', keyboardType: 'numeric', field: 'cpf' },
             { name: 'calendar', placeholder: 'Data Nascimento', keyboardType: 'numeric', field: 'dataNascimento' },
             { name: 'at-sign', placeholder: 'Email', keyboardType: 'email-address', field: 'email' },
-            { name: 'at-sign', placeholder: 'Confirme Email', keyboardType: 'email-address', field: 'confirmeEmail' },
             { name: 'smartphone', placeholder: 'Celular', keyboardType: 'phone-pad', field: 'celular' },
             { name: 'lock', placeholder: 'Senha', keyboardType: 'default', secureTextEntry: !showPassword, field: 'senha', isPassword: true },
-            { name: 'lock', placeholder: 'Confirme Senha', keyboardType: 'default', secureTextEntry: !showConfirmPassword, field: 'confirmeSenha', isPassword: true },
           ].map((field, index) => (
             <View key={index} style={[styles.inputContainer, { marginTop: index === 0 ? hp('1%') : hp('1.7%') }]}>
               <Feather name={field.name} size={RFValue(33)} color="#000000" style={styles.icon} />

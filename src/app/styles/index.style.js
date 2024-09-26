@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#E9E9E9',
+    backgroundColor: '#fff',
   },
   logo: {
     marginTop: hp('3%'),

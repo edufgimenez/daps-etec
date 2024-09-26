@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
-      backgroundColor: '#E9E9E9', // Mesmo fundo da tela de cadastro
+      backgroundColor: '#fff', // Mesmo fundo da tela de cadastro
     },
     logo: {
       width: wp('60%'),
