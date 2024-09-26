@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Text, View, TextInput, TouchableOpacity, StatusBar, KeyboardAvoidingView, Platform, FlatList, TouchableHighlight } from 'react-native';
+import { Text, View, TextInput, TouchableOpacity, StatusBar, KeyboardAvoidingView, Platform, FlatList, TouchableHighlight, Modal } from 'react-native';
 import { useFonts } from 'expo-font';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CheckBox from 'expo-checkbox';
 import styles from './styles/novadenuncia.style';
 import { HERE_API_KEY } from '@env';
+import { supabase } from '../utils/supabase.js';
+import CustomModal from '../components/Modals/ModalDenuncia.js'; // Import the CustomModal component
 
 export default function NovaDenuncia() {
   const insets = useSafeAreaInsets();
@@ -27,8 +29,10 @@ export default function NovaDenuncia() {
   const [bairro, setBairro] = useState('');
   const [numero, setNumero] = useState('');
   const [complemento, setComplemento] = useState('');
-  const [cidadeEstado, setCidadeEstado] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [estado, setEstado] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [isModalVisible, setModalVisible] = useState(false); // State to control modal visibility
 
   if (!fontsLoad) {
     return null;
@@ -61,14 +65,15 @@ export default function NovaDenuncia() {
     const label = suggestion.address.label;
     const ruaMatch = label.match(/^[^,]+/);
     const cepMatch = label.match(/\b\d{5}-\d{3}\b/);
-    const cidadeEstadoMatch = label.match(/,\s*([^,]+),\s*\d{5}-\d{3}/);
+    const cidadeEstadoMatch = label.match(/,\s*([^,]+)\s*-\s*([A-Z]{2})\s*,\s*\d{5}-\d{3}/);
     const bairroMatch = label.match(/,\s*([^,]+),\s*[^,]+,\s*\d{5}-\d{3}/);
 
     setLocal(label);
     setRua(ruaMatch ? ruaMatch[0] : '');
     setCep(cepMatch ? cepMatch[0] : '');
     setBairro(bairroMatch ? bairroMatch[1].trim() : '');
-    setCidadeEstado(cidadeEstadoMatch ? cidadeEstadoMatch[1].trim() : '');
+    setCidade(cidadeEstadoMatch ? cidadeEstadoMatch[1].trim() : '');
+    setEstado(cidadeEstadoMatch ? cidadeEstadoMatch[2].trim() : '');
     setSuggestions([]);
   };
 
@@ -80,7 +85,8 @@ export default function NovaDenuncia() {
     setBairro('');
     setNumero('');
     setComplemento('');
-    setCidadeEstado('');
+    setCidade('');
+    setEstado('');
     setSuggestions([]);
   };
 
@@ -94,6 +100,51 @@ export default function NovaDenuncia() {
   const handleComplementoChange = (text) => {
     if (text.length <= 32) {
       setComplemento(text);
+    }
+  };
+
+  const handleFinalizarPress = () => {
+    setModalVisible(true); // Show the confirmation modal
+  };
+
+  const handleCancelPress = () => {
+    setModalVisible(false); // Hide the confirmation modal
+  };
+
+  const handleCadastrarPress = async () => {
+    try {
+      // Inserir na tabela denuncias
+      const { data, error } = await supabase
+        .from('denuncias') // Nome da tabela no Supabase
+        .insert([
+          {
+            descricao: description,
+            rua: rua,
+            bairro: bairro,
+            cep: cep,
+            cidade: cidade,
+            estado: estado,
+            numero: numero,
+            complemento: complemento,
+            anonimo: checked.anonymous,
+          },
+        ]);
+  
+      if (error) {
+        console.error('Erro ao cadastrar denúncia:', error);
+        alert('Erro ao cadastrar denúncia. Tente novamente.');
+        return;
+      }
+
+      // Fechar o modal e mostrar uma mensagem de sucesso
+      alert('Denúncia cadastrada com sucesso!');
+      handleClearFields(); // Clear fields after successful submission
+  
+    } catch (error) {
+      console.error('Erro ao cadastrar denúncia:', error);
+      alert('Erro ao cadastrar denúncia. Tente novamente.');
+    } finally {
+      setModalVisible(false); // Hide the confirmation modal
     }
   };
 
@@ -154,7 +205,7 @@ export default function NovaDenuncia() {
         style={[styles.input, styles.readOnlyInput]}
         placeholder="Cidade - Estado"
         placeholderTextColor="#666"
-        value={cidadeEstado}
+        value={cidade && estado ? `${cidade} - ${estado}` : ''}
         editable={false}
       />
       <View style={styles.rowContainer}>
@@ -204,7 +255,7 @@ export default function NovaDenuncia() {
       </View>
 
       {/* Botão Finalizar */}
-      <TouchableOpacity style={[styles.button, { marginTop: hp('2%') }]}>
+      <TouchableOpacity style={[styles.button, { marginTop: hp('2%') }]} onPress={handleFinalizarPress}>
         <Text style={styles.buttonText}>Finalizar</Text>
       </TouchableOpacity>
     </View>
@@ -213,13 +264,19 @@ export default function NovaDenuncia() {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height' }
     >
       <FlatList
         data={[{ key: 'form' }]}
         renderItem={renderForm}
         keyExtractor={item => item.key}
         contentContainerStyle={{ flexGrow: 1 }}
+      />
+      <CustomModal
+        visible={isModalVisible}
+        message="Você tem certeza que deseja cadastrar esta denúncia? Denúncias falsas são ilegais."
+        onClose={handleCancelPress}
+        onConfirm={handleCadastrarPress}
       />
     </KeyboardAvoidingView>
   );

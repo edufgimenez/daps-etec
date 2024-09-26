@@ -31,7 +31,7 @@ export default function SignUp() {
     dataNascimento: '',
     email: '',
     confirmeEmail: '',
-    celular: '',
+    telefone: '',
     senha: '',
     confirmeSenha: '',
   });
@@ -45,9 +45,9 @@ export default function SignUp() {
   };
 
   const handleSignUp = async () => {
-    const { nome, sobrenome, cpf, dataNascimento, email, celular, senha } = formData;
+    const { nome, sobrenome, cpf, dataNascimento, email, telefone, senha } = formData;
 
-    if (!nome || !sobrenome || !cpf || !dataNascimento || !email || !celular || !senha) {
+    if (!nome || !sobrenome || !cpf || !dataNascimento || !email || !telefone || !senha) {
       setModalMessage('Todos os campos são obrigatórios.');
       setModalVisible(true);
       return;
@@ -87,7 +87,7 @@ export default function SignUp() {
         cpf,
         data_nascimento: dataNascimento,
         email,
-        celular,
+        telefone,
         senha: hashedPassword
       }]);
 
@@ -127,7 +127,7 @@ export default function SignUp() {
             { name: 'file-text', placeholder: 'CPF', keyboardType: 'numeric', field: 'cpf' },
             { name: 'calendar', placeholder: 'Data Nascimento', keyboardType: 'numeric', field: 'dataNascimento' },
             { name: 'at-sign', placeholder: 'Email', keyboardType: 'email-address', field: 'email' },
-            { name: 'smartphone', placeholder: 'Celular', keyboardType: 'phone-pad', field: 'celular' },
+            { name: 'smartphone', placeholder: 'Celular', keyboardType: 'phone-pad', field: 'telefone' },
             { name: 'lock', placeholder: 'Senha', keyboardType: 'default', secureTextEntry: !showPassword, field: 'senha', isPassword: true },
           ].map((field, index) => (
             <View key={index} style={[styles.inputContainer, { marginTop: index === 0 ? hp('1%') : hp('1.7%') }]}>
