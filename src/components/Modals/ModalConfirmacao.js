@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const ModalDenuncia = ({ visible, message, onClose, onConfirm }) => {
+const ModalConfirmacao = ({ visible, message, onClose, onConfirm }) => {
   return (
     <Modal
       transparent={true}
@@ -17,7 +17,7 @@ const ModalDenuncia = ({ visible, message, onClose, onConfirm }) => {
               <Text style={styles.modalButtonText}>Cancelar</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.modalButton, styles.confirmButton]} onPress={onConfirm}>
-              <Text style={styles.modalButtonText}>Cadastrar</Text>
+              <Text style={styles.modalButtonText}>Sair</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -72,4 +72,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ModalDenuncia;
+export default ModalConfirmacao;

@@ -10,9 +10,13 @@ const styles = StyleSheet.create({
     padding: wp('6%'),
   },
   title: {
-    fontSize: hp('4%'),
-    fontFamily: 'AtkinsonHyperlegible-Bold',
-    //marginBottom: hp('2%'),
+      fontSize: RFValue(42), // Diminui o tamanho da fonte do logo
+      //marginTop: hp('2%'),
+      fontFamily: 'AtkinsonHyperlegible-Bold',
+      //marginBottom: hp('1.2%'), // Diminui o espaçamento inferior
+      textShadowColor: 'rgba(0, 0, 0, 0.25)',
+      textShadowOffset: { width: 0, height: 4 },
+      textShadowRadius: 4,
   },
   subtitle: {
     fontSize: hp('2.5%'),

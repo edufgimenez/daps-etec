@@ -18,9 +18,9 @@ const styles = StyleSheet.create({
       textShadowRadius: 4,
     },
     subtitle: {
-      fontSize: RFValue(14), // Diminui o tamanho da fonte do subtítulo
-      fontFamily: 'Poppins-Light',
-      marginBottom: hp('1%'), // Diminui o espaçamento inferior
+      fontSize: hp('2.5%'),
+      fontFamily: 'Poppins-SemiBold',
+      marginBottom: hp('2%'),
     },
     inputContainer: {
       flexDirection: 'row',

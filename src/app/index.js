@@ -30,6 +30,18 @@ export default function Login() {
     'AtkinsonHyperlegible-Bold': require('../assets/fonts/AtkinsonHyperlegible-Bold.ttf'),
   });
 
+  {/* TODO CRIAR REGRAS E MASCARAS NOS CAMPOS CPF E DIGITE SUA SENHA */}   
+
+  useEffect(() => {
+    const checkUserSession = async () => {
+      const userSession = await AsyncStorage.getItem('userSession');
+      if (userSession) {
+        router.replace("./menu");
+      }
+    };
+    checkUserSession();
+  }, []);
+
   if (!fontsLoad) {
     return undefined;
   }
@@ -59,24 +71,18 @@ export default function Login() {
       Crypto.CryptoDigestAlgorithm.SHA256,
       senha
     );
-    
 
     // Compara o hash da senha digitada com o hash armazenado
     if (hashedInputPassword === data.senha) {
       // Se as senhas coincidem, o login é bem-sucedido
-      await AsyncStorage.setItem('userSession', JSON.stringify(data));
-      router.navigate("./menu");
+      await AsyncStorage.setItem('userSession', JSON.stringify({ cpf }));
+      router.replace("./menu");
     } else {
       // Senha inválida
       console.log(hashedInputPassword);
       setModalMessage('CPF ou senha inválidos!');
       setModalVisible(true);
     }
-  };
-
-  const handleLogout = async () => {
-    await AsyncStorage.removeItem('userSession');
-    router.navigate("/");
   };
 
   return (
@@ -138,9 +144,6 @@ export default function Login() {
               onClose={() => setModalVisible(false)}
             />
           </View>
-          <TouchableOpacity onPress={handleLogout} style={styles.buttonLogout}>
-            <Text style={styles.buttonLogoutText}>Logout</Text>
-          </TouchableOpacity>          
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

@@ -43,7 +43,7 @@ export default function SignUp() {
   const handleInputChange = (name, value) => {
     setFormData({ ...formData, [name]: value });
   };
-
+  {/* TODO CRIAR REGRAS E MASCARAS NOS CAMPOS */} 
   const handleSignUp = async () => {
     const { nome, sobrenome, cpf, dataNascimento, email, telefone, senha } = formData;
 
@@ -52,6 +52,9 @@ export default function SignUp() {
       setModalVisible(true);
       return;
     }
+
+    const [day, month, year] = dataNascimento.split('/');
+    const formattedDate = `${year}-${month}-${day}`;
 
     // Verificar se o CPF já existe no banco
     const { data: existingUser, error } = await supabase
@@ -85,13 +88,14 @@ export default function SignUp() {
         nome,
         sobrenome,
         cpf,
-        data_nascimento: dataNascimento,
+        data_nascimento: formattedDate,
         email,
         telefone,
         senha: hashedPassword
       }]);
 
     if (insertError) {
+      console.log(insertError);
       setModalMessage('Erro ao cadastrar usuário.');
       setModalVisible(true);
       return;

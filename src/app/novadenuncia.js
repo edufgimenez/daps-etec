@@ -7,7 +7,8 @@ import CheckBox from 'expo-checkbox';
 import styles from './styles/novadenuncia.style';
 import { HERE_API_KEY } from '@env';
 import { supabase } from '../utils/supabase.js';
-import CustomModal from '../components/Modals/ModalDenuncia.js'; // Import the CustomModal component
+import ModalDenuncia from '../components/Modals/ModalDenuncia.js';
+import CustomModal from '../components/Modals/CustomModal.js';
 
 export default function NovaDenuncia() {
   const insets = useSafeAreaInsets();
@@ -24,15 +25,17 @@ export default function NovaDenuncia() {
 
   const [description, setDescription] = useState('');
   const [local, setLocal] = useState('');
-  const [rua, setRua] = useState('');
-  const [cep, setCep] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [numero, setNumero] = useState('');
+  const [rua, setRua] = useState();
+  const [cep, setCep] = useState();
+  const [bairro, setBairro] = useState();
+  const [numero, setNumero] = useState();
   const [complemento, setComplemento] = useState('');
-  const [cidade, setCidade] = useState('');
-  const [estado, setEstado] = useState('');
+  const [cidade, setCidade] = useState();
+  const [estado, setEstado] = useState();
   const [suggestions, setSuggestions] = useState([]);
-  const [isModalVisible, setModalVisible] = useState(false); // State to control modal visibility
+  const [isModalDenunciaVisible, setModalDenunciaVisible] = useState(false); // State to control ModalDenuncia visibility
+  const [isCustomModalVisible, setCustomModalVisible] = useState(false); // State to control CustomModal visibility
+  const [modalMessage, setModalMessage] = useState('');
 
   if (!fontsLoad) {
     return null;
@@ -50,7 +53,7 @@ export default function NovaDenuncia() {
 
   const handleLocalChange = (text) => {
     setLocal(text);
-    if (text.length > 12) {
+    if (text.length > 14) {
       fetchAddressData(text);
     } else {
       setSuggestions([]);
@@ -104,47 +107,54 @@ export default function NovaDenuncia() {
   };
 
   const handleFinalizarPress = () => {
-    setModalVisible(true); // Show the confirmation modal
+    if (!description || !rua || !bairro || !cep || !cidade || !estado || !numero) {
+      setModalMessage('Por favor, preencha todos os campos obrigatórios.');
+      setCustomModalVisible(true); // Mostrar o modal personalizado
+      return;
+    }
+    else {
+    setModalDenunciaVisible(true); // Show the confirmation modal
+    }
   };
 
   const handleCancelPress = () => {
-    setModalVisible(false); // Hide the confirmation modal
+    setModalDenunciaVisible(false); // Hide the confirmation modal
+    setCustomModalVisible(false); // Hide the custom modal
   };
 
   const handleCadastrarPress = async () => {
     try {
       // Inserir na tabela denuncias
       const { data, error } = await supabase
-        .from('denuncias') // Nome da tabela no Supabase
-        .insert([
-          {
-            descricao: description,
-            rua: rua,
-            bairro: bairro,
-            cep: cep,
-            cidade: cidade,
-            estado: estado,
-            numero: numero,
-            complemento: complemento,
-            anonimo: checked.anonymous,
+        .from('denuncias')
+        .insert([{
+        descricao: description,
+        rua: rua,
+        bairro: bairro,
+        cep: cep,
+        cidade: cidade,
+        estado: estado,
+        numero: numero,
+        complemento: complemento,
+        anonimo: checked.anonymous,
           },
         ]);
   
       if (error) {
-        console.error('Erro ao cadastrar denúncia:', error);
-        alert('Erro ao cadastrar denúncia. Tente novamente.');
+        setModalMessage('Erro ao cadastrar denúncia. Tente novamente.');
+        setCustomModalVisible(true); // Show the custom modal
         return;
       }
 
-      // Fechar o modal e mostrar uma mensagem de sucesso
-      alert('Denúncia cadastrada com sucesso!');
+      setModalMessage('Denúncia cadastrada com sucesso!');
       handleClearFields(); // Clear fields after successful submission
+      setCustomModalVisible(true); // Show the custom modal
   
     } catch (error) {
       console.error('Erro ao cadastrar denúncia:', error);
-      alert('Erro ao cadastrar denúncia. Tente novamente.');
+      
     } finally {
-      setModalVisible(false); // Hide the confirmation modal
+      setModalDenunciaVisible(false); // Hide the confirmation modal
     }
   };
 
@@ -272,11 +282,16 @@ export default function NovaDenuncia() {
         keyExtractor={item => item.key}
         contentContainerStyle={{ flexGrow: 1 }}
       />
-      <CustomModal
-        visible={isModalVisible}
+      <ModalDenuncia
+        visible={isModalDenunciaVisible}
         message="Você tem certeza que deseja cadastrar esta denúncia? Denúncias falsas são ilegais."
         onClose={handleCancelPress}
         onConfirm={handleCadastrarPress}
+      />
+      <CustomModal
+        visible={isCustomModalVisible}
+        message={modalMessage}
+        onClose={handleCancelPress}
       />
     </KeyboardAvoidingView>
   );
