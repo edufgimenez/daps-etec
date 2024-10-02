@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: 'center',
     marginTop: hp('2%'),
-    marginBottom: hp('1.2%'),
+    marginBottom: hp('2.5%'),
   },
   title: {
     fontSize: RFValue(42), // Diminui o tamanho da fonte do logo
@@ -29,24 +29,37 @@ const styles = StyleSheet.create({
     marginBottom: hp('1.5%'),
   },
   denunciaItem: {
-    padding: hp('2%'),
-    backgroundColor: '#fff',
+    padding: hp('1.5%'),
+    backgroundColor: '#ffffff',
     borderRadius: wp('2%'),
-    marginBottom: hp('1.5%'),
-    shadowColor: '#000',
+    marginBottom: hp('1%'),
+    shadowColor: '#000000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: wp('2%'),
     elevation: 2,
   },
-  denunciaTitle: {
-    fontSize: RFValue(16),
+  label: {
     fontWeight: 'bold',
+  },
+  denunciaProtocolo: {
+    fontSize: RFValue(14),
+    color: '#888',
+    marginBottom: hp('0.5%'),
+  },
+  denunciaLocal: {
+    fontSize: RFValue(14),
     marginBottom: hp('0.5%'),
   },
   denunciaStatus: {
     fontSize: RFValue(14),
     color: '#555',
+    marginBottom: hp('0.5%'),
+  },
+  denunciaData: {
+    fontSize: RFValue(12),
+    color: '#888',
+    marginBottom: hp('0.5%'),
   },
   loadingContainer: {
     flex: 1,
@@ -55,6 +68,16 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     fontSize: RFValue(16),
+  },
+  noDenunciasContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  noDenunciasText: {
+    fontSize: RFValue(16),
+    color: '#888',
+    textAlign: 'center',
   },
 });
 

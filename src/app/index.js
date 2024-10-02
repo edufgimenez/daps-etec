@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Text, View, Image, TouchableOpacity, TextInput, StatusBar, ScrollView, KeyboardAvoidingView, Platform } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
@@ -7,6 +7,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Animatable from 'react-native-animatable';
 import styles from './styles/index.style';
 import CustomModal from '../components/Modals/CustomModal.js';
 import { supabase } from '../utils/supabase.js';
@@ -19,6 +20,9 @@ export default function Login() {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [cpfError, setCpfError] = useState('');
+  const cpfInputRef = useRef(null);
+  const cpfAnimatableRef = useRef(null);
 
   const navigateSignUp = () => {
     router.navigate("./signup");
@@ -29,8 +33,6 @@ export default function Login() {
     'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
     'AtkinsonHyperlegible-Bold': require('../assets/fonts/AtkinsonHyperlegible-Bold.ttf'),
   });
-
-  {/* TODO CRIAR REGRAS E MASCARAS NOS CAMPOS CPF E DIGITE SUA SENHA */}   
 
   useEffect(() => {
     const checkUserSession = async () => {
@@ -46,8 +48,40 @@ export default function Login() {
     return undefined;
   }
 
+  const formatCPF = (value) => {
+    return value
+      .replace(/\D/g, '') // Remove tudo que não é dígito
+      .slice(0, 11) // Limita a 11 dígitos
+      .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona um ponto entre o terceiro e o quarto dígitos
+      .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona um ponto entre o sexto e o sétimo dígitos
+      .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona um traço entre o nono e o décimo dígitos
+  };
+
+  const removeCPFFormatting = (value) => {
+    return value.replace(/\D/g, ''); // Remove tudo que não é dígito
+  };
+
+  const validateCPF = () => {
+    const unformattedCpf = removeCPFFormatting(cpf);
+    if (unformattedCpf.length !== 11) {
+      setCpfError('Por favor, insira um CPF válido com 11 dígitos.');
+      cpfAnimatableRef.current.shake(800);
+      return false;
+    }
+    setCpfError('');
+    return true;
+  };
+
   const handleLogin = async () => {
-    if (!cpf || !senha) {
+    if (!validateCPF()) {
+      setModalMessage('O campo CPF não está completo. Por favor, insira um CPF válido com 11 dígitos.');
+      setModalVisible(true);
+      return;
+    }
+
+    const unformattedCpf = removeCPFFormatting(cpf);
+
+    if (!unformattedCpf || !senha) {
       setModalMessage('O campo CPF e Senha são obrigatórios!');
       setModalVisible(true);
       return;
@@ -56,8 +90,8 @@ export default function Login() {
     // Busca o hash da senha no banco de dados usando o CPF
     const { data, error } = await supabase
       .from('usuarios')
-      .select('senha')
-      .eq('cpf', cpf)
+      .select('senha, nome')
+      .eq('cpf', unformattedCpf)
       .single();
 
     if (error || !data) {
@@ -75,14 +109,27 @@ export default function Login() {
     // Compara o hash da senha digitada com o hash armazenado
     if (hashedInputPassword === data.senha) {
       // Se as senhas coincidem, o login é bem-sucedido
-      await AsyncStorage.setItem('userSession', JSON.stringify({ cpf }));
+      await AsyncStorage.setItem('userSession', JSON.stringify({ cpf: unformattedCpf, nome: data.nome }));
+      console.log(unformattedCpf)
       router.replace("./menu");
     } else {
       // Senha inválida
-      console.log(hashedInputPassword);
       setModalMessage('CPF ou senha inválidos!');
       setModalVisible(true);
     }
+  };
+
+  const handleCpfChange = (text) => {
+    const formattedCpf = formatCPF(text);
+    setCpf(formattedCpf);
+    if (removeCPFFormatting(formattedCpf).length === 11) {
+      setCpfError('');
+    }
+  };
+
+  const handleModalClose = () => {
+    setModalVisible(false);
+    cpfInputRef.current.focus();
   };
 
   return (
@@ -91,21 +138,25 @@ export default function Login() {
       behavior={Platform.OS === 'android' ? 'padding' : 'height'}
     >
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={[styles.container, { paddingTop: hp('1.2%') }]}>
+      <View style={[styles.container, { paddingTop: insets.top }]}>
           <StatusBar style="auto" backgroundColor={"#fff"} />
           <Image source={require('../assets/logo.png')} style={styles.logo} />
           <Text style={styles.logoText}>D.A.P.S</Text>
           
-          <View style={styles.inputContainer}>
+          <Animatable.View ref={cpfAnimatableRef} style={styles.inputContainer}>
             <Feather name="user" size={RFValue(33)} color="#000000" style={styles.icon} />
             <TextInput
+              ref={cpfInputRef}
               style={styles.input}
               value={cpf}
-              onChangeText={setCpf}
+              onChangeText={handleCpfChange}
+              onBlur={validateCPF}
               placeholder="Digite seu CPF"
               keyboardType="numeric"
+              maxLength={14} // Limita o campo a 14 caracteres (incluindo pontos e traço)
             />
-          </View>
+          </Animatable.View>
+          {cpfError ? <Text style={{ color: 'red', fontSize: RFValue(12), marginTop: hp('1%') }}>{cpfError}</Text> : null}
 
           <View style={[styles.inputContainer, { marginTop: hp('3.5%') }]}>
             <Feather name="lock" size={RFValue(33)} color="#000000" style={styles.icon} />
@@ -141,7 +192,7 @@ export default function Login() {
             <CustomModal
               visible={modalVisible}
               message={modalMessage}
-              onClose={() => setModalVisible(false)}
+              onClose={handleModalClose}
             />
           </View>
         </View>

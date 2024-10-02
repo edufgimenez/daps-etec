@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, StatusBar, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -20,6 +20,18 @@ export default function Main() {
   });
 
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar a visibilidade do modal
+  const [userName, setUserName] = useState(''); // Estado para armazenar o nome do usuário
+
+  useEffect(() => {
+    const fetchUserSession = async () => {
+      const userSession = await AsyncStorage.getItem('userSession');
+      if (userSession) {
+        const { nome } = JSON.parse(userSession);
+        setUserName(nome);
+      }
+    };
+    fetchUserSession();
+  }, []);
 
   if (!fontsLoad) {
     return undefined;
@@ -44,7 +56,8 @@ export default function Main() {
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.logoText}>D.A.P.S</Text>
+      <Text style={styles.logoText}>D.A.P.S.</Text>
+      {userName ? <Text style={styles.welcomeText}>Olá, {userName}!</Text> : null}
 
       <View style={styles.menuContainer}>
         <TouchableOpacity 

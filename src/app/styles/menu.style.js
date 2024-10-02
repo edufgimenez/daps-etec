@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#fff',    
   },
   logo: {
     width: wp('60%'),
@@ -15,11 +15,10 @@ const styles = StyleSheet.create({
     marginTop: hp('3%'), // Subir um pouco o logo
   },
   menuContainer: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
     width: wp('100%'),
-    marginTop: hp('0.5%'), // Diminui o espaçamento acima dos botões do menu
+    marginTop: hp('2.5%'), // Diminui o espaçamento acima dos botões do menu
+    //borderWidth: 5,
   },
   menuOption: {
     flexDirection: 'row',
@@ -28,14 +27,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#F1A801',
     paddingVertical: hp('1.25%'),
     paddingHorizontal: wp('5%'),
-    marginVertical: hp('1.25%'), // Reduzi a margem entre os botões
+    marginVertical: hp('1.5%'), // Reduzi a margem entre os botões
     width: wp('75%'),
+    //borderWidth: 5,
   },
   menuText: {
     fontSize: RFValue(18),
     color: '#FFFFFF',
     fontFamily: 'Poppins-SemiBold',
-    marginLeft: wp('4%'),
+    marginLeft: wp('2%'),
   },
   logoText: {
     fontSize: RFValue(48),
@@ -47,14 +47,14 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
   },
   logoutButton: {
-    position: 'relative',
-    bottom: hp('5%'), //
+    position: 'absolute',
+    bottom: hp('4%'),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: wp('50%'),
-    paddingVertical: hp('1%'),
-    backgroundColor: '#e0e0e0',
+    width: wp('60%'),
+    paddingVertical: hp('0.8%'),
+    backgroundColor: '#d9d9d9',
     borderRadius: 8,
   },
   logoutText: {
@@ -63,8 +63,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
     marginLeft: wp('2%'),
   },
+  welcomeText: {
+    fontSize: RFValue(16),
+    fontFamily: 'Poppins-SemiBold',
+    color: '#F1A801',
+  },
 });
 
-
-
-  export default styles;
+export default styles;
