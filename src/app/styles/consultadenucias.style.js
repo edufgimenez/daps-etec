@@ -79,6 +79,63 @@ const styles = StyleSheet.create({
     color: '#888',
     textAlign: 'center',
   },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+    paddingHorizontal: wp('5%'),
+  },
+  searchInput: {
+    flex: 1,
+    height: 35,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginRight: 10,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+  },
+  searchButton: {
+    backgroundColor: '#F1A801',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 5,
+  },
+  searchButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  clearButton: {
+    alignSelf: 'center',
+    marginVertical: 10,
+  },
+  clearButtonText: {
+    color: '#555',
+    textDecorationLine: 'underline',
+  },
+  loadMoreButton: {
+    alignSelf: 'center',
+    marginVertical: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    backgroundColor: '#F1A801',
+    borderRadius: 5,
+  },
+  loadMoreButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  backButton: {
+    marginTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#F1A801',
+    borderRadius: 5,
+  },
+  backButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+  },
+  
 });
 
 export default styles;
