@@ -25,14 +25,15 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: RFValue(18),
-    fontWeight: 'bold',
-    marginBottom: hp('1.5%'),
+    //fontWeight: 'bold',
+    fontFamily: 'Poppins-SemiBold',
+    marginBottom: hp('0.5%'),
   },
   denunciaItem: {
     padding: hp('1.5%'),
     backgroundColor: '#ffffff',
     borderRadius: wp('2%'),
-    marginBottom: hp('1%'),
+    marginBottom: hp('0.7%'),
     shadowColor: '#000000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -40,25 +41,29 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   label: {
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
+    color: '#000',
+    fontFamily: 'Poppins-SemiBold',
+    fontSize: RFValue(13),
   },
   denunciaProtocolo: {
     fontSize: RFValue(14),
-    color: '#888',
+    color: '#000',
     marginBottom: hp('0.5%'),
   },
   denunciaLocal: {
     fontSize: RFValue(14),
+    color: '#000',
     marginBottom: hp('0.5%'),
   },
   denunciaStatus: {
     fontSize: RFValue(14),
-    color: '#555',
+    color: '#000',
     marginBottom: hp('0.5%'),
   },
   denunciaData: {
-    fontSize: RFValue(12),
-    color: '#888',
+    fontSize: RFValue(13),
+    color: '#000',
     marginBottom: hp('0.5%'),
   },
   loadingContainer: {
@@ -67,7 +72,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingText: {
-    fontSize: RFValue(16),
+    fontSize: RFValue(18),
   },
   noDenunciasContainer: {
     flex: 1,
@@ -82,60 +87,79 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: hp('1%'),
     paddingHorizontal: wp('5%'),
   },
   searchInput: {
     flex: 1,
-    height: 35,
+    height: hp('4.5%'),
     borderColor: 'gray',
     borderWidth: 1,
-    marginRight: 10,
-    paddingHorizontal: 10,
-    borderRadius: 5,
+    marginRight: wp('2%'),
+    paddingHorizontal: wp('2.5%'),
+    borderRadius: wp('1.5%'),
   },
   searchButton: {
     backgroundColor: '#F1A801',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 5,
+    paddingVertical: hp('1%'),
+    paddingHorizontal: wp('3%'),
+    borderRadius: wp('1.5%'),
   },
   searchButtonText: {
     color: '#fff',
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
+    fontFamily: 'Poppins-SemiBold',
   },
   clearButton: {
     alignSelf: 'center',
-    marginVertical: 10,
+    marginVertical: hp('1%'),
   },
   clearButtonText: {
     color: '#555',
+    fontFamily: 'Poppins-Light',
     textDecorationLine: 'underline',
+    //fontSize: RFValue(14),
   },
   loadMoreButton: {
     alignSelf: 'center',
-    marginVertical: 10,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
+    marginVertical: hp('1%'),
+    paddingVertical: hp('1.5%'),
+    paddingHorizontal: wp('4%'),
     backgroundColor: '#F1A801',
-    borderRadius: 5,
+    borderRadius: wp('1.5%'),
   },
   loadMoreButtonText: {
     color: '#fff',
-    fontWeight: 'bold',
+     //fontWeight: 'bold',
+     fontFamily: 'Poppins-SemiBold',
   },
   backButton: {
-    marginTop: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    marginTop: hp('2.5%'),
+    paddingVertical: hp('1.5%'),
+    paddingHorizontal: wp('5%'),
     backgroundColor: '#F1A801',
-    borderRadius: 5,
+    borderRadius: wp('1.5%'),
   },
   backButtonText: {
     color: '#fff',
-    fontWeight: 'bold',
+    //fontWeight: 'bold',
+    fontFamily: 'Poppins-SemiBold',
   },
-  
+  tipText: {
+    fontSize: RFValue(14),
+    color: '#888',
+    marginBottom: hp('1%'),
+    textAlign: 'left',
+  },
+  statusCancelado: {
+    color: 'red',
+  },
+  statusFinalizada: {
+    color: 'green',
+  },
+  statusDefault: {
+    color: '#000',
+  },
 });
 
 export default styles;

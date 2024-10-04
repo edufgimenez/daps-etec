@@ -28,12 +28,21 @@ export default function ConsultaDenuncias() {
     fetchDenuncias();
   }, []);
 
+  const getStatusStyle = (status) => {
+    if (status === 'Cancelada pelo órgão' || status === 'Cancelada pelo solicitante') {
+      return styles.statusCancelado;
+    } else if (status === 'Finalizada') {
+      return styles.statusFinalizada;
+    }
+    return styles.statusDefault;
+  };
+
   const fetchDenuncias = async () => {
     try {
       setLoading(true);
       const userSession = JSON.parse(await AsyncStorage.getItem('userSession'));
       const cpfHash = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, userSession.cpf);
-
+  
       const { data, error } = await supabase
         .from('denuncias')
         .select(`
@@ -43,26 +52,29 @@ export default function ConsultaDenuncias() {
             status_denuncia (descricao_status)
           )
         `)
-        .or(`usuario_cpf.eq.${userSession.cpf},cpf_hash.eq.${cpfHash}`)
-        .order('data_denuncia', { ascending: false });
-
+        .or(`usuario_cpf.eq.${userSession.cpf},cpf_hash.eq.${cpfHash}`);
+  
       if (error) {
         throw error;
       }
-
+  
       const andamento = [];
       const finalizadas = [];
-
+  
       data.forEach(denuncia => {
         const statusDescricao = denuncia.denuncias_status[0].status_denuncia.descricao_status;
         const ultimaAtualizacao = denuncia.denuncias_status[0].data_atualizacao;
-        if (statusDescricao !== 'Cancelada pelo Órgão' && statusDescricao !== 'Cancelada pelo Solicitante' && statusDescricao !== 'Finalizada') {
+        if (statusDescricao !== 'Cancelada pelo órgão' && statusDescricao !== 'Cancelada pelo solicitante' && statusDescricao !== 'Finalizada') {
           andamento.push({ ...denuncia, status_descricao: statusDescricao, ultima_atualizacao: ultimaAtualizacao });
         } else {
           finalizadas.push({ ...denuncia, status_descricao: statusDescricao, ultima_atualizacao: ultimaAtualizacao });
         }
       });
-
+  
+      // Ordenar as denúncias por data de última atualização
+      andamento.sort((a, b) => new Date(b.ultima_atualizacao) - new Date(a.ultima_atualizacao));
+      finalizadas.sort((a, b) => new Date(b.ultima_atualizacao) - new Date(a.ultima_atualizacao));
+  
       setDenunciasAndamento(andamento);
       setDenunciasFinalizadas(finalizadas);
       setAllDenunciasAndamento(andamento);
@@ -77,6 +89,8 @@ export default function ConsultaDenuncias() {
 
   const refreshDenuncias = () => {
     setRefreshing(true);
+    setVisibleAndamento(3); // Redefine para exibir apenas 3 resultados
+    setVisibleFinalizadas(3); // Redefine para exibir apenas 3 resultados
     fetchDenuncias();
   };
 
@@ -106,9 +120,11 @@ export default function ConsultaDenuncias() {
     if (filteredAndamento.length === 0 && filteredFinalizadas.length === 0) {
       setModalMessage('Nenhum resultado encontrado.');
       setModalVisible(true);
+      setSelectedDenuncia(null); // Certifique-se de que nenhuma denúncia está selecionada
     } else {
       setDenunciasAndamento(filteredAndamento);
       setDenunciasFinalizadas(filteredFinalizadas);
+      setSelectedDenuncia(null); // Certifique-se de que nenhuma denúncia está selecionada
     }
   };
 
@@ -156,7 +172,7 @@ export default function ConsultaDenuncias() {
       <Text style={styles.denunciaLocal}><Text style={styles.label}>Local:</Text> {denuncia.rua}, {denuncia.numero} - {denuncia.cep}</Text>
       <Text style={styles.denunciaData}><Text style={styles.label}>Data da Denúncia:</Text> {formatDateTime(denuncia.data_denuncia)}</Text>
       <Text style={styles.denunciaData}><Text style={styles.label}>Última Atualização:</Text> {formatDateTime(denuncia.ultima_atualizacao)}</Text>
-      <Text style={styles.denunciaStatus}><Text style={styles.label}>Status:</Text> {denuncia.status_descricao}</Text>
+      <Text style={[styles.denunciaStatus, getStatusStyle(denuncia.status_descricao)]}><Text style={styles.label}>Status:</Text> {denuncia.status_descricao}</Text>
     </TouchableOpacity>
   );
 
@@ -222,6 +238,7 @@ export default function ConsultaDenuncias() {
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Denúncias em Andamento</Text>
+        <Text style={styles.tipText}>Clique em uma denúncia para mais detalhes.</Text>
         {denunciasAndamento.length === 0 ? (
           <Text style={styles.noDenunciasText}>Não há denúncias em andamento.</Text>
         ) : (
@@ -236,6 +253,7 @@ export default function ConsultaDenuncias() {
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Denúncias Finalizadas/Canceladas</Text>
+        <Text style={styles.tipText}>Clique em uma denúncia para mais detalhes.</Text>
         {denunciasFinalizadas.length === 0 ? (
           <Text style={styles.noDenunciasText}>Não há denúncias finalizadas ou canceladas.</Text>
         ) : (

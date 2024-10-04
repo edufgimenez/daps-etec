@@ -223,8 +223,9 @@ export default function NovaDenuncia() {
         return;
       }
 
-      setModalMessage('Denúncia cadastrada com sucesso!');
+      setModalMessage('Denúncia cadastrada com sucesso! Protocolo nº ' + denunciaId + '.');
       handleClearFields();
+      setChecked({ anonymous: false });
       setCustomModalVisible(true);
 
     } catch (error) {

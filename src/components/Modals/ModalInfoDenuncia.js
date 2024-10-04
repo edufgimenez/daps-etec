@@ -35,8 +35,8 @@ const ModalInfoDenuncia = ({ visible, denuncia, onClose, onRefresh }) => {
   };
 
   const handleCancel = () => {
-    if (motivoCancelamento.length < 30) {
-      setCustomModalMessage('O campo Motivo do cancelamento é obrigatório e deve ter no mínimo 30 caracteres.');
+    if (motivoCancelamento.length < 15) {
+      setCustomModalMessage('O campo Motivo do cancelamento é obrigatório e deve ter no mínimo 15 caracteres.');
       setCustomModalVisible(true);
       return;
     }
@@ -98,7 +98,7 @@ const ModalInfoDenuncia = ({ visible, denuncia, onClose, onRefresh }) => {
                     <Text style={styles.sectionTitle}>Cancelar Denúncia</Text>
                     <TextInput
                       style={styles.input}
-                      placeholder="Motivo do cancelamento (Min 30 caracteres)*"
+                      placeholder="Motivo do cancelamento (Min 15 caracteres)*"
                       value={motivoCancelamento}
                       onChangeText={handleMotivoChange}
                       maxLength={100}
