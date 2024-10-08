@@ -5,7 +5,7 @@
   "build": {
     "release": {
       "android": {
-        "image": "latest"  // Certifique-se de usar uma imagem de build mais recente.
+        "image": "latest"
       }
     },
     "development": {
