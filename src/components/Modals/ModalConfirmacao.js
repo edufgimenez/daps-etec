@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const ModalConfirmacao = ({ visible, message, onClose, onConfirm }) => {
   return (
@@ -34,15 +35,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modalContainer: {
-    width: '80%',
+    width: wp('80%'),
     backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
+    borderRadius: wp('2%'),
+    padding: wp('5%'),
     alignItems: 'center',
   },
   modalMessage: {
-    fontSize: 18,
-    marginBottom: 20,
+    fontSize: wp('4.5%'),
+    marginBottom: hp('2%'),
     textAlign: 'center',
     fontFamily: 'Poppins-Light',
   },
@@ -52,11 +53,11 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   modalButton: {
-    borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    borderRadius: wp('1%'),
+    paddingVertical: hp('1.5%'),
+    paddingHorizontal: wp('5%'),
     flex: 1,
-    marginHorizontal: 5,
+    marginHorizontal: wp('1%'),
   },
   cancelButton: {
     backgroundColor: 'red',
@@ -66,7 +67,7 @@ const styles = StyleSheet.create({
   },
   modalButtonText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: wp('4%'),
     fontFamily: 'Poppins-SemiBold',
     textAlign: 'center',
   },

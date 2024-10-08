@@ -6,42 +6,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#fff',    
+    backgroundColor: '#fff',
   },
   logo: {
     width: wp('60%'),
     height: hp('30%'),
-    marginVertical: hp('2%'), // Reduzi um pouco a margem
-    marginTop: hp('3%'), // Subir um pouco o logo
+    marginVertical: hp('2%'),
+    marginTop: hp('3%'),
   },
   menuContainer: {
     alignItems: 'center',
     width: wp('100%'),
-    marginTop: hp('2.5%'), // Diminui o espaçamento acima dos botões do menu
-    //borderWidth: 5,
+    marginTop: hp('2.5%'),
   },
   menuOption: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 8,
+    borderRadius: wp('2%'), // Ajusta a borda arredondada para ser relativa
     backgroundColor: '#F1A801',
     paddingVertical: hp('1.25%'),
     paddingHorizontal: wp('5%'),
-    marginVertical: hp('1.5%'), // Reduzi a margem entre os botões
-    width: wp('75%'),
-    //borderWidth: 5,
+    marginVertical: hp('1.5%'),
+    width: wp('80%'),
   },
   menuText: {
-    fontSize: RFValue(18),
+    fontSize: wp('5%'), // Ajusta o tamanho da fonte do texto do menu
     color: '#FFFFFF',
     fontFamily: 'Poppins-SemiBold',
-    marginLeft: wp('2%'),
+    marginLeft: wp('3%'),
   },
   logoText: {
-    fontSize: RFValue(48),
-    marginTop: hp('1.5%'), // Subir um pouco o texto "D.A.P.S"
+    fontSize: wp('12%'), // Ajusta o tamanho da fonte do texto do logo
+    marginTop: hp('1.5%'),
     fontFamily: 'AtkinsonHyperlegible-Bold',
-    marginBottom: hp('1%'), // Diminuir o espaçamento inferior
+    marginBottom: hp('1%'),
     textShadowColor: 'rgba(0, 0, 0, 0.25)',
     textShadowOffset: { width: 0, height: 4 },
     textShadowRadius: 4,
@@ -52,19 +50,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: wp('60%'),
-    paddingVertical: hp('0.8%'),
+    width: wp('50%'),
+    paddingVertical: hp('1.0%'),
     backgroundColor: '#d9d9d9',
-    borderRadius: 8,
+    borderRadius: wp('2%'), // Ajusta a borda arredondada para ser relativa
   },
   logoutText: {
-    fontSize: RFValue(16),
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do texto de logout
     color: '#000000',
     fontFamily: 'Poppins-SemiBold',
     marginLeft: wp('2%'),
   },
   welcomeText: {
-    fontSize: RFValue(16),
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do texto de boas-vindas
     fontFamily: 'Poppins-SemiBold',
     color: '#F1A801',
   },

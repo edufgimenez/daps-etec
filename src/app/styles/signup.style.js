@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   logoText: {
-    fontSize: RFValue(42), // Diminui o tamanho da fonte do logo
+    fontSize: wp('10%'), // Ajusta o tamanho da fonte do logo
     marginTop: hp('2%'),
     fontFamily: 'AtkinsonHyperlegible-Bold',
     marginBottom: hp('1.2%'), // Diminui o espaçamento inferior
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 4,
   },
   subtitle: {
-    fontSize: hp('2.5%'),
+    fontSize: wp('6%'), // Ajusta o tamanho da fonte do subtítulo
     fontFamily: 'Poppins-SemiBold',
     marginBottom: hp('2%'),
   },
@@ -27,30 +27,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: wp('6%'),
     marginBottom: hp('0.5%'),
-    position: 'relative', // Adicione esta linha
+    position: 'relative',
   },
   icon: {
     marginRight: wp('2%'),
   },
   input: {
     flex: 1,
-    fontSize: RFValue(14), // Diminui o tamanho da fonte do input
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do input
     fontFamily: 'Poppins-Light',
     borderBottomWidth: 1,
     borderBottomColor: '#A7A7A7',
   },
   buttonSignUp: {
     marginTop: hp('4%'), // Diminui o espaçamento superior
-    borderRadius: 8,
+    borderRadius: wp('2%'), // Ajusta a borda arredondada para ser relativa
     backgroundColor: '#F1A801',
-    paddingVertical: hp('1%'), // Diminui o padding vertical
+    paddingVertical: hp('1.5%'), // Ajusta o padding vertical
     alignItems: 'center',
     justifyContent: 'center',
     width: wp('75%'),
     marginBottom: hp('2%'), // Diminui o espaçamento inferior
   },
   buttonSignUpText: {
-    fontSize: RFValue(24), // Diminui o tamanho da fonte do botão
+    fontSize: wp('6%'), // Ajusta o tamanho da fonte do botão
     color: '#FFFFFF',
     fontFamily: 'Poppins-SemiBold',
   },
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: 'red',
-    fontSize: RFValue(12),
+    fontSize: wp('3%'), // Ajusta o tamanho da fonte do texto de erro
     marginTop: hp('0.5%'),
     fontFamily: 'Poppins-Light',
   },
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     marginHorizontal: wp('6%'),
   },
   passwordRule: {
-    fontSize: RFValue(12),
+    fontSize: wp('3%'), // Ajusta o tamanho da fonte das regras de senha
     fontFamily: 'Poppins-Light',
   },
   passwordRuleValid: {

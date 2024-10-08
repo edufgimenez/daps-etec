@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const CustomModal = ({ visible, message, onClose }) => {
+const ModalRelatorio = ({ visible, message, onClose, onConfirm }) => {
   return (
     <Modal
       transparent={true}
@@ -13,9 +13,14 @@ const CustomModal = ({ visible, message, onClose }) => {
       <View style={styles.modalOverlay}>
         <View style={styles.modalContainer}>
           <Text style={styles.modalMessage}>{message}</Text>
-          <TouchableOpacity style={styles.modalButton} onPress={onClose}>
-            <Text style={styles.modalButtonText}>OK</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={[styles.modalButton, styles.cancelButton]} onPress={onClose}>
+              <Text style={styles.modalButtonText}>Cancelar</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.modalButton, styles.confirmButton]} onPress={onConfirm}>
+              <Text style={styles.modalButtonText}>Gerar</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </Modal>
@@ -42,11 +47,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Poppins-Light',
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
   modalButton: {
-    backgroundColor: '#F1A801',
     borderRadius: wp('1%'),
     paddingVertical: hp('1.5%'),
     paddingHorizontal: wp('5%'),
+    flex: 1,
+    marginHorizontal: wp('1%'),
+  },
+  cancelButton: {
+    backgroundColor: 'red',
+  },
+  confirmButton: {
+    backgroundColor: '#F1A801',
   },
   modalButtonText: {
     color: '#fff',
@@ -56,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomModal;
+export default ModalRelatorio;

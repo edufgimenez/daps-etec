@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: wp('6%'),
+    marginBottom: hp('2%'), // Adiciona margem inferior para espaçamento
   },
   icon: {
     marginRight: wp('2%'),
@@ -54,9 +55,9 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     marginTop: hp('3%'),
-    borderRadius: 8,
+    borderRadius: wp('2%'), // Ajusta a borda arredondada para ser relativa
     backgroundColor: '#F1A801',
-    paddingVertical: hp('1%'),
+    paddingVertical: hp('1.5%'), // Aumenta o padding vertical para melhor toque
     alignItems: 'center',
     justifyContent: 'center',
     width: wp('75%'),
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-SemiBold',
   },
   signUpContainer: {
-    flexDirection: 'grid',
+    flexDirection: 'row', // Corrige a direção do flex para 'row'
     alignItems: 'center',
     marginBottom: hp('1.5%'),
   },
@@ -78,8 +79,8 @@ const styles = StyleSheet.create({
   signUpLinkText: {
     textDecorationLine: 'underline',
     fontFamily: 'Poppins-Light',
+    fontSize: RFValue(16), // Adiciona o tamanho da fonte para consistência
   },
-  
 });
 
 export default styles;

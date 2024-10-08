@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     marginBottom: hp('2.5%'),
   },
   title: {
-    fontSize: RFValue(42), // Diminui o tamanho da fonte do logo
+    fontSize: wp('10%'), // Ajusta o tamanho da fonte do título
     fontFamily: 'AtkinsonHyperlegible-Bold',
     textShadowColor: 'rgba(0, 0, 0, 0.25)',
     textShadowOffset: { width: 0, height: 4 },
@@ -24,8 +24,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp('5%'),
   },
   sectionTitle: {
-    fontSize: RFValue(18),
-    //fontWeight: 'bold',
+    fontSize: wp('4.5%'), // Ajusta o tamanho da fonte do título da seção
     fontFamily: 'Poppins-SemiBold',
     marginBottom: hp('0.5%'),
   },
@@ -41,28 +40,27 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   label: {
-    //fontWeight: 'bold',
     color: '#000',
     fontFamily: 'Poppins-SemiBold',
-    fontSize: RFValue(13),
+    fontSize: wp('3.5%'), // Ajusta o tamanho da fonte do rótulo
   },
   denunciaProtocolo: {
-    fontSize: RFValue(14),
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do protocolo da denúncia
     color: '#000',
     marginBottom: hp('0.5%'),
   },
   denunciaLocal: {
-    fontSize: RFValue(14),
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do local da denúncia
     color: '#000',
     marginBottom: hp('0.5%'),
   },
   denunciaStatus: {
-    fontSize: RFValue(14),
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do status da denúncia
     color: '#000',
     marginBottom: hp('0.5%'),
   },
   denunciaData: {
-    fontSize: RFValue(13),
+    fontSize: wp('3.5%'), // Ajusta o tamanho da fonte da data da denúncia
     color: '#000',
     marginBottom: hp('0.5%'),
   },
@@ -72,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingText: {
-    fontSize: RFValue(18),
+    fontSize: wp('5%'), // Ajusta o tamanho da fonte do texto de carregamento
   },
   noDenunciasContainer: {
     flex: 1,
@@ -80,7 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   noDenunciasText: {
-    fontSize: RFValue(16),
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do texto de "sem denúncias"
     color: '#888',
     textAlign: 'center',
   },
@@ -107,7 +105,6 @@ const styles = StyleSheet.create({
   },
   searchButtonText: {
     color: '#fff',
-    //fontWeight: 'bold',
     fontFamily: 'Poppins-SemiBold',
   },
   clearButton: {
@@ -118,7 +115,7 @@ const styles = StyleSheet.create({
     color: '#555',
     fontFamily: 'Poppins-Light',
     textDecorationLine: 'underline',
-    //fontSize: RFValue(14),
+    fontSize: wp('3.5%'), // Ajusta o tamanho da fonte do texto do botão limpar
   },
   loadMoreButton: {
     alignSelf: 'center',
@@ -130,8 +127,7 @@ const styles = StyleSheet.create({
   },
   loadMoreButtonText: {
     color: '#fff',
-     //fontWeight: 'bold',
-     fontFamily: 'Poppins-SemiBold',
+    fontFamily: 'Poppins-SemiBold',
   },
   backButton: {
     marginTop: hp('2.5%'),
@@ -142,11 +138,10 @@ const styles = StyleSheet.create({
   },
   backButtonText: {
     color: '#fff',
-    //fontWeight: 'bold',
     fontFamily: 'Poppins-SemiBold',
   },
   tipText: {
-    fontSize: RFValue(14),
+    fontSize: wp('3.6%'), // Ajusta o tamanho da fonte do texto de dica
     color: '#888',
     marginBottom: hp('1%'),
     textAlign: 'left',

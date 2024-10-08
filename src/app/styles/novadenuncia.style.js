@@ -10,16 +10,14 @@ const styles = StyleSheet.create({
     padding: wp('6%'),
   },
   title: {
-      fontSize: RFValue(42), // Diminui o tamanho da fonte do logo
-      //marginTop: hp('2%'),
-      fontFamily: 'AtkinsonHyperlegible-Bold',
-      //marginBottom: hp('1.2%'), // Diminui o espaçamento inferior
-      textShadowColor: 'rgba(0, 0, 0, 0.25)',
-      textShadowOffset: { width: 0, height: 4 },
-      textShadowRadius: 4,
+    fontSize: wp('10%'), // Ajusta o tamanho da fonte do título
+    fontFamily: 'AtkinsonHyperlegible-Bold',
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textShadowOffset: { width: 0, height: 4 },
+    textShadowRadius: 4,
   },
   subtitle: {
-    fontSize: hp('2.5%'),
+    fontSize: wp('6%'), // Ajusta o tamanho da fonte do subtítulo
     fontFamily: 'Poppins-SemiBold',
     marginBottom: hp('2%'),
   },
@@ -28,18 +26,18 @@ const styles = StyleSheet.create({
     height: hp('6%'),
     borderColor: '#ccc',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: wp('1%'), // Ajusta a borda arredondada para ser relativa
     paddingHorizontal: wp('2%'),
     marginBottom: hp('1.5%'),
     fontFamily: 'Poppins-Light',
     color: '#000',
-    fontSize: RFValue(14),
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do input
   },
   readOnlyInput: {
     backgroundColor: '#f0f0f0',
     color: '#000',
     fontFamily: 'Poppins-Light',
-    fontSize: RFValue(14),
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do input somente leitura
   },
   textAreaContainer: {
     width: wp('90%'),
@@ -58,6 +56,7 @@ const styles = StyleSheet.create({
     right: wp('2%'),
     fontFamily: 'Poppins-Light',
     color: '#666',
+    fontSize: wp('3%'), // Ajusta o tamanho da fonte do contador de caracteres
   },
   rowContainer: {
     flexDirection: 'row',
@@ -82,12 +81,12 @@ const styles = StyleSheet.create({
   checkboxLabel: {
     fontFamily: 'Poppins-Light',
     marginLeft: wp('2%'),
-    fontSize: RFValue(14),
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do rótulo do checkbox
   },
   button: {
     marginTop: hp('2%'),
     marginBottom: hp('0.5%'),
-    borderRadius: 8,
+    borderRadius: wp('2%'), // Ajusta a borda arredondada para ser relativa
     backgroundColor: '#F1A801',
     paddingVertical: hp('1%'),
     alignItems: 'center',
@@ -95,20 +94,20 @@ const styles = StyleSheet.create({
     width: wp('75%'),
   },
   buttonText: {
-    fontSize: RFValue(24),
+    fontSize: wp('6%'), // Ajusta o tamanho da fonte do texto do botão
     color: '#FFFFFF',
     fontFamily: 'Poppins-SemiBold',
   },
   clearButton: {
     backgroundColor: '#e0e0e0',
-    borderRadius: 5,
+    borderRadius: wp('1%'), // Ajusta a borda arredondada para ser relativa
     paddingVertical: hp('0.5%'),
     paddingHorizontal: wp('2%'),
     alignItems: 'center',
     justifyContent: 'center',
   },
   clearButtonText: {
-    fontSize: RFValue(14),
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do texto do botão limpar
     color: '#000',
     fontFamily: 'Poppins-Light',
   },
@@ -118,7 +117,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderColor: '#ccc',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: wp('1%'), // Ajusta a borda arredondada para ser relativa
     marginBottom: hp('2%'),
     overflow: 'hidden',
   },
@@ -127,6 +126,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     borderBottomWidth: 1,
     color: '#000',
+    fontSize: wp('4%'), // Ajusta o tamanho da fonte do item de sugestão
   },
 });
 

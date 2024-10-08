@@ -61,8 +61,8 @@ const ModalInfoDenuncia = ({ visible, denuncia, onClose, onRefresh }) => {
       visible={visible}
       onRequestClose={onClose}
     >
-      <View style={styles.modalContainer}>
-        <View style={styles.modalContent}>
+      <View style={styles.modalOverlay}>
+        <View style={styles.modalContainer}>
           <Text style={styles.modalTitle}>Detalhes da Denúncia</Text>
           {denuncia ? (
             <ScrollView style={styles.scrollView}>
@@ -87,7 +87,7 @@ const ModalInfoDenuncia = ({ visible, denuncia, onClose, onRefresh }) => {
                 <Text style={styles.infoText}><Text style={styles.label}>Estado:</Text> {denuncia.estado}</Text>
               </View>
 
-              {denuncia.status_descricao === 'Cancelada pelo Órgão' || denuncia.status_descricao === 'Cancelada pelo Solicitante' ? (
+              {denuncia.status_descricao === 'Cancelada pelo órgão' || denuncia.status_descricao === 'Cancelada pelo solicitante' ? (
                 <View style={styles.section}>
                   <Text style={styles.sectionTitle}>Motivo do Cancelamento</Text>
                   <Text style={styles.infoText}>{denuncia.motivo_cancelamento}</Text>
@@ -137,33 +137,33 @@ const ModalInfoDenuncia = ({ visible, denuncia, onClose, onRefresh }) => {
 };
 
 const styles = StyleSheet.create({
-  modalContainer: {
+  modalOverlay: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-  modalContent: {
-    width: wp('90%'),
-    height: 'auto',
-    backgroundColor: 'white',
+  modalContainer: {
+    width: wp('95%'), // Aumenta a largura do modal
+    maxHeight: hp('90%'), // Aumenta a altura máxima do modal
+    backgroundColor: '#fff',
+    borderRadius: wp('2%'),
     padding: wp('5%'),
-    borderRadius: 10,
     alignItems: 'center',
   },
   modalTitle: {
-    fontSize: RFValue(20),
+    fontSize: wp('5%'),
     fontWeight: 'bold',
-    marginBottom: hp('1.5%'),
+    marginBottom: hp('2%'),
   },
   scrollView: {
     width: '100%',
   },
   section: {
-    marginBottom: hp('1.5%'),
+    marginBottom: hp('2%'),
   },
   sectionTitle: {
-    fontSize: RFValue(16),
+    fontSize: wp('4.5%'),
     fontWeight: 'bold',
     marginBottom: hp('1%'),
     borderBottomWidth: 1,
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   infoText: {
-    fontSize: RFValue(14),
+    fontSize: wp('4%'),
     marginBottom: hp('0.5%'),
     textAlign: 'left',
   },
@@ -183,21 +183,21 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: '#ccc',
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: wp('1%'),
     padding: wp('2%'),
     marginTop: hp('1%'),
     marginBottom: hp('1%'),
   },
   charCounter: {
     alignSelf: 'flex-end',
-    fontSize: RFValue(10),
+    fontSize: wp('3%'),
     color: '#888',
     marginBottom: hp('1%'),
   },
   cancelButton: {
     backgroundColor: 'red',
     padding: wp('3%'),
-    borderRadius: 5,
+    borderRadius: wp('1%'),
     marginTop: hp('0.2%'),
     alignItems: 'center',
     width: wp('60%'), // Ajuste a largura conforme necessário
@@ -206,19 +206,19 @@ const styles = StyleSheet.create({
   cancelButtonText: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: RFValue(16),
+    fontSize: wp('4%'),
   },
   closeButton: {
     backgroundColor: '#ccc',
     padding: wp('3%'),
-    borderRadius: 5,
-    marginTop: hp('0%'), // Reduzir a margem superior para diminuir a distância
+    borderRadius: wp('1%'),
+    marginTop: hp('1%'),
     width: wp('30%'), // Ajuste a largura conforme necessário
   },
   closeButtonText: {
     color: 'black',
     fontWeight: 'bold',
-    fontSize: RFValue(14),
+    fontSize: wp('4%'),
     textAlign: 'center',
   },
 });

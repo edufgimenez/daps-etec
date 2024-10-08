@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CheckBox from 'expo-checkbox';
 import styles from './styles/novadenuncia.style';
-import { HERE_API_KEY } from '@env';
+import { fetchHereApiData } from '../utils/hereapi.js';
 import { supabase } from '../utils/supabase.js';
 import ModalDenuncia from '../components/Modals/ModalDenuncia.js';
 import CustomModal from '../components/Modals/CustomModal.js';
@@ -60,8 +60,7 @@ export default function NovaDenuncia() {
   
   const fetchAddressData = async (local) => {
     try {
-      const response = await fetch(`https://autosuggest.search.hereapi.com/v1/autosuggest?at=0,0&q=${local}&apiKey=${HERE_API_KEY}`);
-      const data = await response.json();
+      const data = await fetchHereApiData(local);
   
       const filteredSuggestions = Array.isArray(data.items) ? data.items.filter(validateAddressFormat) : [];
   

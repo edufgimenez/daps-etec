@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "daps",
+    "name": "D.A.P.S",
     "slug": "daps",
-    "version": "1.0.0",
+    "version": "1.0.5",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/logo.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./src/assets/splashimage.png",
-      //"resizeMode": "contain",
-      //"aspectRatio": "1.5",
+      "resizeMode": "contain",
+      "aspectRatio": "1.5",
       "backgroundColor": "#F0A901"
     },
     "assetBundlePatterns": [
@@ -19,18 +19,22 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 4,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./src/assets/logo.png",
         "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+      },
+      "package": "com.edufgimenez.daps",
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "plugins": [
       "expo-font",
       "expo-router"
     ],
-    "scheme": "daps"
+    "scheme": "daps",
+    "sdkVersion": "51.0.0",
   }
 }

@@ -19,3 +19,41 @@ Lib para responsividade em diversos tamanhos de telas
     color: '#FFFFFF',
     fontFamily: 'Poppins-SemiBold',
   },
+
+
+npm install expo@51 <--- funcionou a build nessa versão
+npm install expo@latest 
+
+eas build -p android --profile preview <-- para gerar .apk na build
+
+
+{
+  "cli": {
+    "version": ">= 10.0.2"
+  },
+  "build": {
+    "release": {
+      "android": {
+        "image": "latest"  // Certifique-se de usar uma imagem de build mais recente. <<--- adicionado também na build que funcionou
+      }
+    },
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      }
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {}
+  }
+}
+
+
+https://stackoverflow.com/questions/74782725/expo-android-eas-build-crashes-at-startup
+https://github.com/expo/eas-cli/issues/2195#issuecomment-2344328591
