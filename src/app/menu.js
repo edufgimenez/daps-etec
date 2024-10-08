@@ -101,10 +101,10 @@ export default function Main() {
             .header { text-align: center; margin-top: 20px; margin-bottom: 10px; }
             .header img { width: 100px; margin-bottom: 10px; }
             .header h1 { margin: 0; margin-bottom: 5px; }
-            .header h4 { margin: 0; font-size: 16px; margin-bottom: 32px; }
-            .denuncia { margin-bottom: 20px; margin-left: 12px; }
+            .header h4 { margin: 0; font-size: 16px; margin-bottom: 26px; }
+            .denuncia { margin-bottom: 10px; margin-left: 12px; }
             .denuncia p { margin: 5px; }
-            .separator { border-top: 1px solid #000; margin: 20px 0; }
+            .separator { border-top: 1px solid #000; margin: 10px 0; }
             .page-break { page-break-after: always; }
           </style>
         </head>

@@ -70,16 +70,16 @@ const styles = StyleSheet.create({
   signUpContainer: {
     flexDirection: 'row', // Corrige a direção do flex para 'row'
     alignItems: 'center',
-    marginBottom: hp('1.5%'),
+    marginBottom: hp('5%'),
   },
   signUpText: {
-    fontSize: RFValue(16),
+    fontSize: RFValue(14),
     fontFamily: 'Poppins-Light',
   },
   signUpLinkText: {
     textDecorationLine: 'underline',
     fontFamily: 'Poppins-Light',
-    fontSize: RFValue(16), // Adiciona o tamanho da fonte para consistência
+    fontSize: RFValue(14), // Adiciona o tamanho da fonte para consistência
   },
 });
 

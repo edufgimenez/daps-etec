@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     marginLeft: wp('3%'),
   },
   logoText: {
-    fontSize: wp('12%'), // Ajusta o tamanho da fonte do texto do logo
+    fontSize: wp('15%'), // Ajusta o tamanho da fonte do texto do logo
     marginTop: hp('1.5%'),
     fontFamily: 'AtkinsonHyperlegible-Bold',
     marginBottom: hp('1%'),
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     marginLeft: wp('2%'),
   },
   welcomeText: {
-    fontSize: wp('4%'), // Ajusta o tamanho da fonte do texto de boas-vindas
+    fontSize: wp('5%'), // Ajusta o tamanho da fonte do texto de boas-vindas
     fontFamily: 'Poppins-SemiBold',
     color: '#F1A801',
   },
