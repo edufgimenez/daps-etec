@@ -10,6 +10,7 @@ import styles from './styles/decibelimetro.style';
 
 export default function Decibelimetro() {
   const [decibels, setDecibels] = useState(0);
+  const [decibelReadings, setDecibelReadings] = useState([]);
   const [recording, setRecording] = useState(null);
   const router = useRouter();
   const insets = useSafeAreaInsets();
@@ -50,26 +51,44 @@ export default function Decibelimetro() {
   );
 
   const startRecording = async () => {
-    // Verifica se há alguma gravação ativa
     if (recording) {
-      await stopRecording(); // Garante que a gravação anterior pare antes de iniciar uma nova
+      await stopRecording();
     }
-
+  
     try {
       const newRecording = new Audio.Recording();
       await newRecording.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
       await newRecording.startAsync();
       setRecording(newRecording);
-
+  
       newRecording.setOnRecordingStatusUpdate((status) => {
         if (status.metering) {
-          setDecibels(-status.metering); // Atualiza os decibéis com o valor do metering
+          const MIN_DB = 15;
+          const MAX_DB = 130;
+          const MIN_METERING = -160;
+          const MAX_METERING = 0;
+          
+          const normalizedDecibels = MIN_DB + ((status.metering - MIN_METERING) / (MAX_METERING - MIN_METERING)) * (MAX_DB - MIN_DB);
+  
+          setDecibelReadings((prev) => {
+            const updatedReadings = [...prev, normalizedDecibels];
+            if (updatedReadings.length > 10) updatedReadings.shift(); // Mantém um buffer de 10 leituras
+            return updatedReadings;
+          });
         }
       });
     } catch (error) {
       console.error('Erro ao iniciar a gravação:', error);
     }
   };
+  
+  // Calcular a média dos valores de decibéis
+  useEffect(() => {
+    if (decibelReadings.length > 0) {
+      const avgDecibels = decibelReadings.reduce((a, b) => a + b, 0) / decibelReadings.length;
+      setDecibels(avgDecibels);
+    }
+  }, [decibelReadings]);
 
   const stopRecording = async () => {
     if (recording) {
@@ -82,8 +101,6 @@ export default function Decibelimetro() {
         } finally {
           setRecording(null); // Limpa o estado da gravação
         }
-      } else {
-        //console.log('A gravação já foi descarregada.');
       }
     }
   };

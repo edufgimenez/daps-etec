@@ -41,6 +41,7 @@ export default function NovaDenuncia() {
   const [isCustomModalVisible, setCustomModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [decibels, setDecibels] = useState(0);
+  const [decibelReadings, setDecibelReadings] = useState([]);
   const [recording, setRecording] = useState(null);
 
   useEffect(() => {
@@ -71,22 +72,41 @@ export default function NovaDenuncia() {
     if (recording) {
       await stopRecording();
     }
-
+  
     try {
       const newRecording = new Audio.Recording();
       await newRecording.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
       await newRecording.startAsync();
       setRecording(newRecording);
-
+  
       newRecording.setOnRecordingStatusUpdate((status) => {
         if (status.metering) {
-          setDecibels(-status.metering);
+          const MIN_DB = 15;
+          const MAX_DB = 130;
+          const MIN_METERING = -160;
+          const MAX_METERING = 0;
+          
+          const normalizedDecibels = MIN_DB + ((status.metering - MIN_METERING) / (MAX_METERING - MIN_METERING)) * (MAX_DB - MIN_DB);
+  
+          setDecibelReadings((prev) => {
+            const updatedReadings = [...prev, normalizedDecibels];
+            if (updatedReadings.length > 10) updatedReadings.shift(); // Mantém um buffer de 10 leituras
+            return updatedReadings;
+          });
         }
       });
     } catch (error) {
       console.error('Erro ao iniciar a gravação:', error);
     }
   };
+  
+  // Calcular a média dos valores de decibéis
+  useEffect(() => {
+    if (decibelReadings.length > 0) {
+      const avgDecibels = decibelReadings.reduce((a, b) => a + b, 0) / decibelReadings.length;
+      setDecibels(avgDecibels);
+    }
+  }, [decibelReadings]);
 
   const stopRecording = async () => {
     if (recording) {
