@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
       width: wp('60%'),
       height: hp('30%'),
       marginVertical: hp('2%'),
-      marginTop: hp('3%'),
+      marginTop: hp('1.2%'),
     },
     title: {
       fontSize: wp('8%'),

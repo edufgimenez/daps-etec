@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, Image, TouchableOpacity, BackHandler, StyleSheet, StatusBar } from 'react-native';
+import { View, Text, Image, TouchableOpacity, BackHandler, StyleSheet, StatusBar, ScrollView } from 'react-native';
 import { Audio } from 'expo-av';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
@@ -63,7 +63,7 @@ export default function Decibelimetro() {
 
       newRecording.setOnRecordingStatusUpdate((status) => {
         if (status.metering) {
-          setDecibels(status.metering); // Atualiza os decibéis com o valor do metering
+          setDecibels(-status.metering); // Atualiza os decibéis com o valor do metering
         }
       });
     } catch (error) {
@@ -94,27 +94,29 @@ export default function Decibelimetro() {
   };
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
-      <StatusBar style="auto" backgroundColor={"#fff"} />
-      <Image
-        source={require('../assets/logo.png')}
-        style={styles.logo}
-        resizeMode="contain"
-      />
-      <Text style={styles.title}>Decibelímetro</Text>
-      <Text style={styles.decibels}>{decibels.toFixed(2)} dB</Text>
-      <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
-        <Text style={styles.backButtonText}>Voltar</Text>
-      </TouchableOpacity>
-      <Text style={styles.infoText}>
-        O decibelímetro mede o nível de pressão sonora em decibéis (dB). Utilize este aplicativo para monitorar o nível de ruído no ambiente.
-      </Text>
-      <Text style={styles.additionalInfoText}>
-        Níveis de ruído aceitáveis:
-        {'\n'}- Até 50 dB: Silencioso
-        {'\n'}- 50 a 70 dB: Moderado
-        {'\n'}- Acima de 70 dB: Alto
-      </Text>
-    </View>
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={[styles.container, { paddingTop: insets.top }]}>
+        <StatusBar style="auto" backgroundColor={"#fff"} />
+        <Image
+          source={require('../assets/logo.png')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        <Text style={styles.title}>Decibelímetro</Text>
+        <Text style={styles.decibels}>{decibels.toFixed(2)} dB</Text>
+        <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+          <Text style={styles.backButtonText}>Voltar</Text>
+        </TouchableOpacity>
+        <Text style={styles.infoText}>
+          O decibelímetro mede o nível de pressão sonora em decibéis (dB). Utilize este aplicativo para monitorar o nível de ruído no ambiente.
+        </Text>
+        <Text style={styles.additionalInfoText}>
+          Níveis de ruído aceitáveis:
+          {'\n'}- Até 50 dB: Silencioso
+          {'\n'}- 50 a 70 dB: Moderado
+          {'\n'}- Acima de 70 dB: Alto
+        </Text>
+      </View>
+    </ScrollView>
   );
 }

@@ -80,7 +80,7 @@ export default function NovaDenuncia() {
 
       newRecording.setOnRecordingStatusUpdate((status) => {
         if (status.metering) {
-          setDecibels(status.metering);
+          setDecibels(-status.metering);
         }
       });
     } catch (error) {
