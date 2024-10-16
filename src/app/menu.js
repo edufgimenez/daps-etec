@@ -132,6 +132,7 @@ export default function Main() {
           <p><strong>Data da Denúncia:</strong> ${new Date(denuncia.data_denuncia).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}</p>
           <p><strong>Status:</strong> ${denuncia.denuncias_status[0].status_denuncia.descricao_status}</p>
           <p><strong>Motivo Cancelamento:</strong> ${denuncia.motivo_cancelamento || 'Não foi Cancelada.'}</p>
+          <p><strong>Decibéis registrado na hora da denúncia:</strong> ${denuncia.decibeis !== null ? denuncia.decibeis : 'Não captado'}</p>
         </div>
         <div class="separator"></div>
       `).join('');
@@ -189,12 +190,17 @@ export default function Main() {
           <Feather name="bar-chart-2" size={RFValue(24)} color="#000000" />
           <Text style={styles.menuText}>Gerar Relatório</Text>
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.menuOption} onPress={() => router.navigate('/decibelimetro')}>
+          <Feather name="mic" size={RFValue(24)} color="#000000" />
+          <Text style={styles.menuText}>Decibelímetro</Text>
+        </TouchableOpacity>
       </View>
 
       {/* Botão de Logout na parte inferior */}
       <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
         <Feather name="log-out" size={RFValue(20)} color="#000000" />
-        <Text style={styles.logoutText}>Logout</Text>
+        <Text style={styles.logoutText}>LOGOUT</Text>
       </TouchableOpacity>
 
       {/* Modal de Confirmação de Logout */}

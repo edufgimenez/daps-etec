@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Text, View, TextInput, TouchableOpacity, StatusBar, KeyboardAvoidingView, Platform, FlatList, TouchableHighlight, Modal } from 'react-native';
 import { useFonts } from 'expo-font';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -9,8 +9,10 @@ import { fetchHereApiData } from '../utils/hereapi.js';
 import { supabase } from '../utils/supabase.js';
 import ModalDenuncia from '../components/Modals/ModalDenuncia.js';
 import CustomModal from '../components/Modals/CustomModal.js';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
-import * as Crypto from 'expo-crypto'; // Importação do expo-crypto
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Crypto from 'expo-crypto';
+import { Audio } from 'expo-av';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function NovaDenuncia() {
   const insets = useSafeAreaInsets();
@@ -38,10 +40,68 @@ export default function NovaDenuncia() {
   const [isModalDenunciaVisible, setModalDenunciaVisible] = useState(false);
   const [isCustomModalVisible, setCustomModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const [decibels, setDecibels] = useState(0);
+  const [recording, setRecording] = useState(null);
 
-  if (!fontsLoad) {
-    return null;
-  }
+  useEffect(() => {
+    const requestPermissionsAndStartRecording = async () => {
+      const { status } = await Audio.requestPermissionsAsync();
+      if (status !== 'granted') {
+        alert('Permissão para acessar o microfone é necessária!');
+      } else {
+        await startRecording();
+      }
+    };
+    requestPermissionsAndStartRecording();
+
+    return () => {
+      stopRecording();
+    };
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        stopRecording();
+      };
+    }, [recording])
+  );
+
+  const startRecording = async () => {
+    if (recording) {
+      await stopRecording();
+    }
+
+    try {
+      const newRecording = new Audio.Recording();
+      await newRecording.prepareToRecordAsync(Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY);
+      await newRecording.startAsync();
+      setRecording(newRecording);
+
+      newRecording.setOnRecordingStatusUpdate((status) => {
+        if (status.metering) {
+          setDecibels(status.metering);
+        }
+      });
+    } catch (error) {
+      console.error('Erro ao iniciar a gravação:', error);
+    }
+  };
+
+  const stopRecording = async () => {
+    if (recording) {
+      const status = await recording.getStatusAsync();
+      if (status.isRecording) {
+        try {
+          await recording.stopAndUnloadAsync();
+        } catch (error) {
+          console.error('Erro ao parar a gravação:', error);
+        } finally {
+          setRecording(null);
+        }
+      }
+    }
+  };
 
   const generateHash = async (cpf) => {
     const hash = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, cpf);
@@ -52,18 +112,18 @@ export default function NovaDenuncia() {
     if (!suggestion || !suggestion.address || !suggestion.address.label) {
       return false;
     }
-  
+
     const addressPattern = /^[^,]+, \d+, [^,]+, [^,]+ - [A-Z]{2}, \d{5}-\d{3}, Brasil$/;
-  
+
     return addressPattern.test(suggestion.address.label);
   };
-  
+
   const fetchAddressData = async (local) => {
     try {
       const data = await fetchHereApiData(local);
-  
+
       const filteredSuggestions = Array.isArray(data.items) ? data.items.filter(validateAddressFormat) : [];
-  
+
       setSuggestions(filteredSuggestions.slice(0, 5));
     } catch (error) {
       console.error(error);
@@ -103,10 +163,8 @@ export default function NovaDenuncia() {
 
     if (numericText.length === 8) {
       fetchAddressByCep(numericText);
-    } else if (text.length > 10) {
-      fetchAddressData(text);
     } else {
-      setSuggestions([]);
+      fetchAddressData(text);
     }
   };
 
@@ -173,7 +231,7 @@ export default function NovaDenuncia() {
 
   const handleCadastrarPress = async () => {
     try {
-      const userSession = JSON.parse(await AsyncStorage.getItem('userSession')); // Get userSession from AsyncStorage
+      const userSession = JSON.parse(await AsyncStorage.getItem('userSession'));
       
       const cpfHash = checked.anonymous ? await generateHash(userSession.cpf) : null;
 
@@ -188,8 +246,9 @@ export default function NovaDenuncia() {
         complemento: complemento,
         anonimo: checked.anonymous,
         data_denuncia: new Date().toISOString(),
-        usuario_cpf: checked.anonymous ? null : userSession.cpf, // Use userSession to get cpf
+        usuario_cpf: checked.anonymous ? null : userSession.cpf,
         cpf_hash: checked.anonymous ? cpfHash : null,
+        decibeis: decibels, // Adiciona o nível de decibéis
       };
 
       const { data: denuncia, error: denunciaError } = await supabase
@@ -342,6 +401,10 @@ export default function NovaDenuncia() {
       </TouchableOpacity>
     </View>
   );
+
+  if (!fontsLoad) {
+    return null;
+  }
 
   return (
     <KeyboardAvoidingView

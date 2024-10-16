@@ -74,6 +74,7 @@ const ModalInfoDenuncia = ({ visible, denuncia, onClose, onRefresh }) => {
                 <Text style={styles.infoText}><Text style={styles.label}>Última Atualização:</Text> {new Date(denuncia.ultima_atualizacao).toLocaleString('pt-BR')}</Text>
                 <Text style={styles.infoText}><Text style={styles.label}>Anônimo:</Text> {denuncia.anonimo ? 'Sim' : 'Não'}</Text>
                 <Text style={styles.infoText}><Text style={styles.label}>Status:</Text> {denuncia.status_descricao}</Text>
+                <Text style={styles.infoText}><Text style={styles.label}>Nivel de Decibéis:</Text> {denuncia.decibeis !== null ? denuncia.decibeis : 'Não captado'}</Text>
               </View>
 
               <View style={styles.section}>

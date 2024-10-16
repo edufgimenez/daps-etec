@@ -9,62 +9,66 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   logo: {
-    width: wp('60%'),
-    height: hp('30%'),
-    marginVertical: hp('2%'),
-    marginTop: hp('3%'),
+    width: wp('50%'),
+    height: hp('25%'),
+    marginVertical: hp('1%'),
+    marginTop: hp('2%'),
   },
   menuContainer: {
     alignItems: 'center',
     width: wp('100%'),
-    marginTop: hp('2.5%'),
+    marginTop: hp('2%'), // Aumentar a margem superior para afastar do welcomeText
   },
   menuOption: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: wp('2%'), // Ajusta a borda arredondada para ser relativa
+    borderRadius: wp('2%'),
     backgroundColor: '#F1A801',
-    paddingVertical: hp('1.25%'),
-    paddingHorizontal: wp('5%'),
-    marginVertical: hp('1.5%'),
-    width: wp('80%'),
+    paddingVertical: hp('1.5%'), // Aumentar o padding vertical
+    paddingHorizontal: wp('6%'), // Aumentar o padding horizontal
+    marginVertical: hp('1.2%'), // Aumentar a margem vertical
+    width: wp('80%'), // Aumentar a largura
   },
   menuText: {
-    fontSize: wp('5%'), // Ajusta o tamanho da fonte do texto do menu
+    fontSize: wp('5.5%'), // Aumentar o tamanho da fonte
     color: '#FFFFFF',
     fontFamily: 'Poppins-SemiBold',
-    marginLeft: wp('3%'),
+    marginLeft: wp('3.5%'), // Aumentar a margem esquerda
   },
   logoText: {
-    fontSize: wp('15%'), // Ajusta o tamanho da fonte do texto do logo
-    marginTop: hp('1.5%'),
+    fontSize: wp('12%'),
+    marginTop: hp('1%'),
     fontFamily: 'AtkinsonHyperlegible-Bold',
-    marginBottom: hp('1%'),
+    marginBottom: hp('0.5%'),
     textShadowColor: 'rgba(0, 0, 0, 0.25)',
     textShadowOffset: { width: 0, height: 4 },
     textShadowRadius: 4,
   },
   logoutButton: {
     position: 'absolute',
-    bottom: hp('4%'),
+    bottom: hp('3%'), // Diminuir a margem inferior
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: wp('50%'),
-    paddingVertical: hp('1.0%'),
+    width: wp('55%'), // Aumentar a largura
+    paddingVertical: hp('1.2%'), // Aumentar o padding vertical
     backgroundColor: '#d9d9d9',
-    borderRadius: wp('2%'), // Ajusta a borda arredondada para ser relativa
+    borderRadius: wp('2%'),
   },
   logoutText: {
-    fontSize: wp('4%'), // Ajusta o tamanho da fonte do texto de logout
+    fontSize: wp('4%'), // Aumentar o tamanho da fonte
     color: '#000000',
     fontFamily: 'Poppins-SemiBold',
-    marginLeft: wp('2%'),
+    marginLeft: wp('2.5%'), // Aumentar a margem esquerda
   },
   welcomeText: {
-    fontSize: wp('5%'), // Ajusta o tamanho da fonte do texto de boas-vindas
+    fontSize: wp('5%'), // Aumentar o tamanho da fonte
     fontFamily: 'Poppins-SemiBold',
     color: '#F1A801',
+    marginTop: hp('2%'), // Adicionar margem superior para afastar do logoText
+  },
+  lastMenuOption: {
+    marginBottom: hp('5%'), // Adicionar margem inferior ao último botão
   },
 });
 

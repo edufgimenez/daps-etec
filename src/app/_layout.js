@@ -13,6 +13,7 @@ export default function Layout() {
             <Stack.Screen name='menu' options={{ title: "Menu", headerShown: false}}/>
             <Stack.Screen name='novadenuncia' options={{ title: "Cadastro de Denúncia", headerShown: true}}/>
             <Stack.Screen name='consultadenuncias' options={{ title: "Consulta de Denúncias", headerShown: true}}/>
+            <Stack.Screen name='decibelimetro' options={{ title: "Decibelímetro", headerShown: true}}/>
             <Stack.Screen name='signup' options={{ title: "Cadastrar", headerShown: true}}/>
 
         </Stack>
