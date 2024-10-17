@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   logo: {
-    marginTop: hp('3%'),
+    marginTop: hp('2.5%'),
     width: wp('60%'),
     height: hp('25%'),
     aspectRatio: 1,
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    //alignItems: 'center',
     marginHorizontal: wp('6%'),
     marginBottom: hp('2%'), // Adiciona margem inferior para espaçamento
   },

@@ -72,7 +72,7 @@ export default function Decibelimetro() {
   
           setDecibelReadings((prev) => {
             const updatedReadings = [...prev, normalizedDecibels];
-            if (updatedReadings.length > 10) updatedReadings.shift(); // Mantém um buffer de 10 leituras
+            if (updatedReadings.length > 5) updatedReadings.shift(); // Mantém um buffer de 10 leituras
             return updatedReadings;
           });
         }

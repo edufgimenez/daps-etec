@@ -133,7 +133,7 @@ export default function NovaDenuncia() {
       return false;
     }
 
-    const addressPattern = /^[^,]+, \d+, [^,]+, [^,]+ - [A-Z]{2}, \d{5}-\d{3}, Brasil$/;
+    const addressPattern = /^[^,]+(, \d+)?(, [^,]+){2} - [A-Z]{2}, \d{5}-\d{3}, Brasil$/;
 
     return addressPattern.test(suggestion.address.label);
   };
@@ -141,9 +141,10 @@ export default function NovaDenuncia() {
   const fetchAddressData = async (local) => {
     try {
       const data = await fetchHereApiData(local);
-
+  
+      // Aplicar a validação do padrão de endereço apenas nas sugestões retornadas pela API
       const filteredSuggestions = Array.isArray(data.items) ? data.items.filter(validateAddressFormat) : [];
-
+  
       setSuggestions(filteredSuggestions.slice(0, 5));
     } catch (error) {
       console.error(error);
@@ -179,11 +180,12 @@ export default function NovaDenuncia() {
 
   const handleLocalChange = (text) => {
     setLocal(text);
+  
+    // Check if the input is a potential CEP (numeric and 8 digits) and fetch by CEP
     const numericText = text.replace(/[^0-9]/g, '');
-
     if (numericText.length === 8) {
       fetchAddressByCep(numericText);
-    } else {
+    } else if (text.length > 8) { // Trigger API search when input length is greater than 3 characters
       fetchAddressData(text);
     }
   };
