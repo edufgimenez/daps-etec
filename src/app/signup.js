@@ -51,7 +51,7 @@ export default function SignUp() {
     telefone: useRef(null),
     senha: useRef(null),
   };
-
+  
   const animatableRefs = {
     nome: useRef(null),
     sobrenome: useRef(null),
@@ -227,8 +227,12 @@ export default function SignUp() {
   };
 
   const shakeAndFocusField = (field) => {
-    animatableRefs[field].current.shake(800);
-    inputRefs[field].current.focus();
+    if (animatableRefs[field] && animatableRefs[field].current) {
+      animatableRefs[field].current.shake(800);
+    }
+    if (inputRefs[field] && inputRefs[field].current) {
+      inputRefs[field].current.focus();
+    }
   };
 
   const handleCloseModal = () => {
